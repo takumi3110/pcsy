@@ -749,6 +749,37 @@ class AccessLine(models.Model):
 		verbose_name_plural = 'アクセス回線'
 
 
+class Trank(models.Model):
+	name = models.CharField(
+		verbose_name='トランク名',
+		max_length=50
+	)
+
+	location = models.ForeignKey(
+		Location,
+		on_delete=models.CASCADE,
+		verbose_name='ロケーション'
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=status_choice
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'トランク'
+		verbose_name_plural = 'トランク'
+
 
 
 
