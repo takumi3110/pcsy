@@ -1,9 +1,9 @@
 from pathlib import Path
-from . import local_settings
+from local_settings import *
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = local_settings.SECRET_KEY
+SECRET_KEY = key
 
 DEBUG = True
 
@@ -16,6 +16,9 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django_bootstrap5',
+	'django_filters',
+	'rest_framework',
 	'user',
 	'ldap',
 	'bootstrap4',
@@ -46,7 +49,7 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 			],
 			'builtins': [
-				'bootstrap4.templatetags.bootstrap4',
+				# 'bootstrap4.templatetags.bootstrap4',
 			],
 		},
 	},
@@ -54,12 +57,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pcsy.wsgi.application'
 
+"""
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.sqlite3',
 		'NAME': BASE_DIR / 'db.sqlite3',
 	}
 }
+"""
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'pcsy',
+		'USER': LOCAL_DB_USER,
+		'PASSWORD': LOCAL_DB_PASS,
+		'HOST': '127.0.0.1',
+		'PORT': LOCAL_DB_PORT,
+		'OPTIONS': {
+			'charset': 'utf8mb4',
+		}
+	}
+}
+
 
 AUTH_PASSWORD_VALIDATORS = [
 	{
@@ -86,6 +105,10 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'admin/login'
@@ -99,10 +122,16 @@ AUTHENTICATION_BACKENDS = [
 	'ldap.backend.Backend',
 ]
 
-LDAP_HOST = local_settings.LDAP_HOST
+LDAP_HOST = LDAP_HOST
 
-LDAP_PORT = local_settings.LDAP_PORT
+LDAP_PORT = LDAP_PORT
 
-LDAP_DOMAIN = local_settings.LDAP_DOMAIN
+LDAP_DOMAIN = LDAP_DOMAIN
 
-LDAP_SEARCH_BASE = local_settings.LDAP_SEARCH_BASE
+LDAP_SEARCH_BASE = LDAP_SEARCH_BASE
+
+REST_FRAMEWORK = {
+	'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+	'PAGE_SIZE': 10,
+}
