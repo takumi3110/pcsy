@@ -1,6 +1,8 @@
 venv
 .idea
 __pycache__
-local_settings.py
 migrations
+temp
+
+local_settings.py
 db.sqlite3
