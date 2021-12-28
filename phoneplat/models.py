@@ -781,6 +781,98 @@ class Trank(models.Model):
 		verbose_name_plural = 'トランク'
 
 
+class Scenario(models.Model):
+	number = models.CharField(
+		verbose_name='シナリオNo',
+		max_length=50
+	)
+
+	name = models.CharField(
+		verbose_name='シナリオ名',
+		max_length=100
+	)
+
+	service = models.ForeignKey(
+		Service,
+		on_delete=models.CASCADE,
+		verbose_name='サービス名'
+	)
+
+	team = models.ForeignKey(
+		Team,
+		on_delete=models.CASCADE,
+		verbose_name='チーム名'
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=status_choice
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者'
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return f'{self.number}{self.name}'
+
+	class Meta:
+		verbose_name = 'シナリオ'
+		verbose_name_plural = 'シナリオ'
+
+
+class TrankInfo(models.Model):
+	trank_primary = models.ForeignKey(
+		Trank,
+		on_delete=models.CASCADE,
+		verbose_name='トランク1'
+	)
+
+	trank_secondary = models.ForeignKey(
+		Trank,
+		on_delete=models.CASCADE,
+		verbose_name='トランク2',
+		null=True,
+		blank=True
+	)
+
+	prefix_primary = models.PositiveSmallIntegerField(
+		verbose_name='プレフィックス1'
+	)
+
+	prefix_secondary = models.PositiveSmallIntegerField(
+		verbose_name='プレフィックス2',
+		null=True,
+		blank=True
+	)
+
+	access_line = models.ForeignKey(
+		AccessLine,
+		on_delete=models.CASCADE,
+		verbose_name='アクセス回線'
+	)
+
+	def __str__(self):
+		return self.trank_primary
+
+	class Meta:
+		verbose_name = 'トランク情報'
+		verbose_name_plural = 'トランク情報'
 
 
 
