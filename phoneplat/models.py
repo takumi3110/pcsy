@@ -151,7 +151,7 @@ class Dept(models.Model):
 	status = models.CharField(
 		verbose_name='ステータス',
 		max_length=20,
-		choices=status_choices
+		choices=dept_choices
 	)
 
 	aggregate_code = models.PositiveSmallIntegerField(
