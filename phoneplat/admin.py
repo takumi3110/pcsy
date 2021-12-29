@@ -180,3 +180,57 @@ class TrankAdmin(admin.modelAdmin):
 	list_filter = ('name', 'location', 'status')
 	search_fields = ('name', 'location', 'status')
 	actions_on_bottom = True
+
+
+@admin.register(Scenario)
+class ScenarioAdmin(admin.modelAdmin):
+	list_display = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
+	list_display_links = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
+	list_filter = ('service', 'team', 'status', 'updated_user')
+	search_fields = ('service', 'team', 'status', 'updated_user')
+	actions_on_bottom = True 
+
+
+@admin.register(TrankInfo)
+class TrankInfoAdmin(admin.modelAdmin):
+	list_display = ('trank_primary', 'prefix_primary', 'access_line')
+	list_display_links = ('trank_primary', 'prefix_primary', 'access_line')
+	list_filter = ('trank_primary', 'prefix_primary', 'access_line')
+	search_fields = ('trank_primary', 'trank_secondary', 'prefix_primary', 'prefix_primary', 'access_line')
+	actions_on_bottom = True 
+
+
+@admin.register(PayingService)
+class PayingServiceAdmin(admin.modelAdmin):
+	list_display = ('name', 'career')
+	list_display_links = ('name', 'career')
+	list_filter = ('name', 'career')
+	search_fields = ('name', 'career')
+	actions_on_bottom = True 
+
+
+@admin.register(IncomingNumber)
+class IncomingNumberAdmin(admin.modelAdmin):
+	list_display = ('number', 'paying_service', 'status', 'start_date', 'updated_date', 'updated_user')
+	list_display_links = ('number', 'paying_service', 'status', 'start_date', 'updated_date', 'updated_user')
+	list_filter = ('number', 'paying_service', 'status', 'updated_user')
+	search_fields = ('number', 'paying_service', 'status', 'updated_user')
+	actions_on_bottom = True
+
+
+@admin.register(PayingCode)
+class PayingCodeAdmin(admin.modelAdmin):
+	list_display = ('code', 'status', 'service', 'target', 'dept', 'updated_date', 'updated_user')
+	list_display_links = ('code', 'status', 'service', 'target', 'dept', 'updated_date', 'updated_user')
+	list_filter = ('code', 'status', 'service', 'target', 'dept', 'updated_user')
+	search_fields = ('code', 'status', 'service', 'target', 'dept', 'updated_user')
+	actions_on_bottom = True
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.modelAdmin):
+	list_display = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	list_display_links = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	list_filter = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	search_fields = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	actions_on_bottom = True
