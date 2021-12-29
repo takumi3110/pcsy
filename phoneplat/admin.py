@@ -43,6 +43,11 @@ class AccessLineInline(admin.TabularInline):
 	extra = 0
 
 
+class NotificationInline(admin.TabularInline):
+	model = Notification
+	extra = 0
+
+
 @admin.register(Site)
 class SiteAdmin(admin.ModelAdmin):
 	list_display = ('name', 'status')
