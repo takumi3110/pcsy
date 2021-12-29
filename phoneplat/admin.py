@@ -11,6 +11,7 @@ class TenantInline(admin.TabularInline):
 class TeamInline(admin.TabularInline):
 	model = Team
 	extra = 0
+	fk_name = 'tenant'
 
 
 class LineCategoryInline(admin.TabularInline):
@@ -40,6 +41,11 @@ class ServiceInline(admin.TabularInline):
 
 class AccessLineInline(admin.TabularInline):
 	model = AccessLine
+	extra = 0
+
+
+class NotificationInline(admin.TabularInline):
+	model = Notification
 	extra = 0
 
 
@@ -116,7 +122,7 @@ class ContractNumberAdmin(admin.ModelAdmin):
 
 
 @admin.register(ParentNumber)
-class ParentNumberAdmin(admin.modelAdmin):
+class ParentNumberAdmin(admin.ModelAdmin):
 	list_display = ('number', 'career', 'status', 'line_category')
 	list_display_links = ('number', 'career', 'status', 'line_category')
 	list_filter = ('number', 'career', 'status', 'line_category')
@@ -126,7 +132,7 @@ class ParentNumberAdmin(admin.modelAdmin):
 
 
 @admin.register(System)
-class SystemAdmin(admin.modelAdmin):
+class SystemAdmin(admin.ModelAdmin):
 	list_display = ('name',)
 	list_display_links = ('name',)
 	search_fields = ('name',)
@@ -134,7 +140,7 @@ class SystemAdmin(admin.modelAdmin):
 
 
 @admin.register(PhoneNumber)
-class PhoneNumberAdmin(admin.modelAdmin):
+class PhoneNumberAdmin(admin.ModelAdmin):
 	list_display = ('category', 'number', 'status', 'system', 'opening_date', 'updated_date', 'updated_user')
 	list_display_links = ('category', 'number', 'status', 'system', 'opening_date', 'updated_date', 'updated_user')
 	list_filter = ('category', 'number', 'status', 'system', 'updated_user')
@@ -143,7 +149,7 @@ class PhoneNumberAdmin(admin.modelAdmin):
 
 
 @admin.register(SurplusNumber)
-class SurplusNumberAdmin(admin.modelAdmin):
+class SurplusNumberAdmin(admin.ModelAdmin):
 	list_display = ('number', 'status', 'system', 'opening_date', 'end_date', 'updated_date', 'updated_user')
 	list_display_links = ('number', 'status', 'system', 'opening_date', 'end_date', 'updated_date', 'updated_user')
 	list_filter = ('number', 'status', 'system', 'updated_user')
@@ -152,7 +158,7 @@ class SurplusNumberAdmin(admin.modelAdmin):
 
 
 @admin.register(Service)
-class ServiceAdmin(admin.modelAdmin):
+class ServiceAdmin(admin.ModelAdmin):
 	list_display = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date', 'updated_date',
 	                'updated_user')
 	list_display_links = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
@@ -163,7 +169,7 @@ class ServiceAdmin(admin.modelAdmin):
 
 
 @admin.register(AccessLine)
-class AccessLineAdmin(admin.modelAdmin):
+class AccessLineAdmin(admin.ModelAdmin):
 	list_display = ('location', 'system', 'status', 'career', 'line_category', 'parent_number', 'opening_date',
 	                'updated_date', 'updated_user')
 	list_display_links = ('location', 'system', 'status', 'career', 'line_category', 'parent_number',
@@ -174,9 +180,63 @@ class AccessLineAdmin(admin.modelAdmin):
 
 
 @admin.register(Trank)
-class TrankAdmin(admin.modelAdmin):
+class TrankAdmin(admin.ModelAdmin):
 	list_display = ('name', 'location', 'status')
 	list_display_links = ('name', 'location', 'status')
 	list_filter = ('name', 'location', 'status')
 	search_fields = ('name', 'location', 'status')
+	actions_on_bottom = True
+
+
+@admin.register(Scenario)
+class ScenarioAdmin(admin.ModelAdmin):
+	list_display = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
+	list_display_links = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
+	list_filter = ('service', 'team', 'status', 'updated_user')
+	search_fields = ('service', 'team', 'status', 'updated_user')
+	actions_on_bottom = True 
+
+
+@admin.register(TrankInfo)
+class TrankInfoAdmin(admin.ModelAdmin):
+	list_display = ('trank_primary', 'prefix_primary', 'access_line')
+	list_display_links = ('trank_primary', 'prefix_primary', 'access_line')
+	list_filter = ('trank_primary', 'prefix_primary', 'access_line')
+	search_fields = ('trank_primary', 'trank_secondary', 'prefix_primary', 'prefix_primary', 'access_line')
+	actions_on_bottom = True 
+
+
+@admin.register(PayingService)
+class PayingServiceAdmin(admin.ModelAdmin):
+	list_display = ('name', 'career')
+	list_display_links = ('name', 'career')
+	list_filter = ('name', 'career')
+	search_fields = ('name', 'career')
+	actions_on_bottom = True 
+
+
+@admin.register(IncomingNumber)
+class IncomingNumberAdmin(admin.ModelAdmin):
+	list_display = ('number', 'paying_service', 'status', 'start_date', 'updated_date', 'updated_user')
+	list_display_links = ('number', 'paying_service', 'status', 'start_date', 'updated_date', 'updated_user')
+	list_filter = ('number', 'paying_service', 'status', 'updated_user')
+	search_fields = ('number', 'paying_service', 'status', 'updated_user')
+	actions_on_bottom = True
+
+
+@admin.register(PayingCode)
+class PayingCodeAdmin(admin.ModelAdmin):
+	list_display = ('code', 'status', 'service', 'target', 'dept')
+	list_display_links = ('code', 'status', 'service', 'target', 'dept')
+	list_filter = ('code', 'status', 'service', 'target', 'dept')
+	search_fields = ('code', 'status', 'service', 'target', 'dept')
+	actions_on_bottom = True
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+	list_display = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	list_display_links = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	list_filter = ('number', 'incoming_number', 'phone_number', 'paying_code')
+	search_fields = ('number', 'incoming_number', 'phone_number', 'paying_code')
 	actions_on_bottom = True

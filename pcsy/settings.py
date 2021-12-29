@@ -1,5 +1,7 @@
 from pathlib import Path
-from local_settings import *
+from .local_settings import *
+
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,6 +24,7 @@ INSTALLED_APPS = [
 	'user',
 	'ldap',
 	'bootstrap4',
+	'phoneplat'
 ]
 
 MIDDLEWARE = [
