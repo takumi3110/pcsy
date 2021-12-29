@@ -781,7 +781,302 @@ class Trank(models.Model):
 		verbose_name_plural = 'トランク'
 
 
+class Scenario(models.Model):
+	number = models.CharField(
+		verbose_name='シナリオNo',
+		max_length=50
+	)
 
+	name = models.CharField(
+		verbose_name='シナリオ名',
+		max_length=100
+	)
+
+	service = models.ForeignKey(
+		Service,
+		on_delete=models.CASCADE,
+		verbose_name='サービス名'
+	)
+
+	team = models.ForeignKey(
+		Team,
+		on_delete=models.CASCADE,
+		verbose_name='チーム名'
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=status_choice
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者'
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return f'{self.number}{self.name}'
+
+	class Meta:
+		verbose_name = 'シナリオ'
+		verbose_name_plural = 'シナリオ'
+
+
+class TrankInfo(models.Model):
+	trank_primary = models.ForeignKey(
+		Trank,
+		on_delete=models.CASCADE,
+		verbose_name='トランク1'
+	)
+
+	trank_secondary = models.ForeignKey(
+		Trank,
+		on_delete=models.CASCADE,
+		verbose_name='トランク2',
+		null=True,
+		blank=True
+	)
+
+	prefix_primary = models.PositiveSmallIntegerField(
+		verbose_name='プレフィックス1'
+	)
+
+	prefix_secondary = models.PositiveSmallIntegerField(
+		verbose_name='プレフィックス2',
+		null=True,
+		blank=True
+	)
+
+	access_line = models.ForeignKey(
+		AccessLine,
+		on_delete=models.CASCADE,
+		verbose_name='アクセス回線'
+	)
+
+	def __str__(self):
+		return self.trank_primary
+
+	class Meta:
+		verbose_name = 'トランク情報'
+		verbose_name_plural = 'トランク情報'
+
+
+# Paying
+class PayingService(models.Model):
+	name = models.CharField(
+		verbose_name='着信課金サービス名',
+		max_length=50
+	)
+
+	career = models.ForeignKey(
+		Career,
+		on_delete=models.CASCADE,
+		verbose_name='キャリア'
+	)
+
+	def __str__(self):
+		return f'{self.name} {self.career.name}'
+
+	class Meta:
+		verbose_name = '着信課金サービス'
+		verbose_name_plural = '着信課金サービス'
+
+
+class IncomingNumber(models.Model):
+	holder_choice = (
+		('PI', 'PI'),
+		('CL', 'CL')
+	)
+
+	number = models.CharField(
+		verbose_name='着信課金番号',
+		max_length=16
+	)
+
+	paying_service = models.ForeignKey(
+		PayingService,
+		on_delete=models.CASCADE,
+		verbose_name='着信課金サービス'
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=status_choice
+	)
+
+	holder = models.CharField(
+		verbose_name='名義',
+		max_length=4,
+		choices=holder_choice
+	)
+
+	channel_count = models.PositiveSmallIntegerField(
+		verbose_name='FD-CH数'
+	)
+
+	start_date = models.DateField(
+		verbose_name='利用開始日',
+		null=True,
+		blank=True
+	)
+
+	country = models.CharField(
+		verbose_name='提供対地',
+		max_length=50
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者'
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.number
+
+	class Meta:
+		verbose_name = '着信課金番号'
+		verbose_name_plural = '着信課金番号'
+
+
+class PayingCode(models.Model):
+	paying_choice = (
+		('余剰', '余剰'),
+		('使用中', '使用中'),
+		('TEMS削除待ち', 'TEMS削除待ち'),
+		('廃止済み', '廃止済み')
+	)
+	code = models.PositiveSmallIntegerField(
+		verbose_name='課金コード',
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=paying_choice
+	)
+
+	service = models.ForeignKey(
+		Service,
+		on_delete=models.CASCADE,
+		verbose_name='サービス名'
+	)
+
+	dept = models.ForeignKey(
+		Dept,
+		on_delete=models.CASCADE,
+		verbose_name='部門コード'
+	)
+
+	target = models.CharField(
+		verbose_name='対象DID',
+		max_length=16
+	)
+
+	start_date = models.DateField(
+		verbose_name='利用開始日',
+		null=True,
+		blank=True
+	)
+
+	end_date = models.DateField(
+		verbose_name='利用終了日',
+		null=True,
+		blank=True
+	)
+
+	tems = models.BooleanField(
+		verbose_name='TEMS連携',
+	)
+
+	tems_date = models.DateField(
+		verbose_name='TEMS反映日'
+	)
+
+	file = models.FileField(
+		null=True,
+		blank=True
+	)
+
+	ticket_number = models.PositiveIntegerField(
+		verbose_name='チケット番号',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.code
+
+	class Meta:
+		verbose_name = '課金コード'
+		verbose_name_plural = '課金コード'
+
+
+class Notification(models.Model):
+	number = models.CharField(
+		verbose_name='通知番号',
+		max_length=16
+	)
+
+	incoming_number = models.ForeignKey(
+		IncomingNumber,
+		on_delete=models.CASCADE,
+		verbose_name='着信課金番号'
+	)
+
+	phone_number = models.ForeignKey(
+		PhoneNumber,
+		on_delete=models.CASCADE,
+		verbose_name='発信専用番号',
+		null=True,
+		blank=True
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	paying_code = models.ForeignKey(
+		PayingCode,
+		on_delete=models.CASCADE,
+		verbose_name='課金コード'
+	)
+
+	def __str__(self):
+		return self.number
+
+	class Meta:
+		verbose_name = '通知番号'
+		verbose_name_plural = '通知番号'
 
 
 
