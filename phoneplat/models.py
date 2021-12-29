@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 
 from user.models import User
@@ -38,6 +39,24 @@ class Site(models.Model):
 		null=True,
 		blank=True
 	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		null=True,
+		blank=True
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者',
+		null=True,
+		blank=True
+	)
+
+	def save(self, *args, **kwargs):
+		self.updated_date = timezone.now()
+		super(Site, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.name
@@ -93,7 +112,7 @@ class Team(models.Model):
 	tenant = models.ForeignKey(
 		Tenant,
 		on_delete=models.CASCADE,
-		verbose_name='テナント'
+		verbose_name='テナント',
 	)
 
 	bcp_tenant = models.ForeignKey(
@@ -102,6 +121,7 @@ class Team(models.Model):
 		verbose_name='BCPテナント',
 		null=True,
 		blank=True,
+		related_name='bcp_tenant'
 	)
 
 	start_date = models.DateField(
@@ -122,8 +142,6 @@ class Team(models.Model):
 
 	proportion = models.BooleanField(
 		verbose_name='按分対象',
-		null=True,
-		blank=True
 	)
 
 	contact_user = models.ForeignKey(
@@ -131,6 +149,13 @@ class Team(models.Model):
 		on_delete=models.CASCADE,
 		verbose_name='担当者',
 	)
+
+	def __str__(self):
+		return f'{self.code} {self.name}'
+
+	class Meta:
+		verbose_name = 'チーム'
+		verbose_name_plural = 'チーム'
 
 
 class Dept(models.Model):
@@ -160,8 +185,6 @@ class Dept(models.Model):
 
 	active = models.BooleanField(
 		verbose_name='使用中',
-		null=True,
-		blank=True
 	)
 
 	team = models.ForeignKey(
@@ -423,7 +446,7 @@ class PhoneNumber(models.Model):
 	)
 
 	obsolete_date = models.DateField(
-		vebose_name='利用終了日',
+		verbose_name='利用終了日',
 		null=True,
 		blank=True
 	)
@@ -578,14 +601,10 @@ class Service(models.Model):
 
 	holiday = models.BooleanField(
 		verbose_name='祝日設定',
-		null=True,
-		blank=True
 	)
 
 	always = models.BooleanField(
 		verbose_name='24h/365日対応',
-		null=True,
-		blank=True
 	)
 
 	start_date = models.DateField(
@@ -649,6 +668,30 @@ class Service(models.Model):
 		User,
 		on_delete=models.CASCADE,
 		verbose_name='更新者',
+		null=True,
+		blank=True
+	)
+
+	contract_number = models.ForeignKey(
+		ContractNumber,
+		on_delete=models.CASCADE,
+		verbose_name='契約番号',
+		null=True,
+		blank=True
+	)
+
+	line_category = models.ForeignKey(
+		LineCategory,
+		on_delete=models.CASCADE,
+		verbose_name='回線種別',
+		null=True,
+		blank=True
+	)
+
+	parent_number = models.ForeignKey(
+		ParentNumber,
+		on_delete=models.CASCADE,
+		verbose_name='親番号',
 		null=True,
 		blank=True
 	)
@@ -840,7 +883,8 @@ class TrankInfo(models.Model):
 	trank_primary = models.ForeignKey(
 		Trank,
 		on_delete=models.CASCADE,
-		verbose_name='トランク1'
+		verbose_name='トランク1',
+		related_name='trank_primary'
 	)
 
 	trank_secondary = models.ForeignKey(
@@ -848,7 +892,8 @@ class TrankInfo(models.Model):
 		on_delete=models.CASCADE,
 		verbose_name='トランク2',
 		null=True,
-		blank=True
+		blank=True,
+		related_name='trank_secondary'
 	)
 
 	prefix_primary = models.PositiveSmallIntegerField(
@@ -1077,8 +1122,3 @@ class Notification(models.Model):
 	class Meta:
 		verbose_name = '通知番号'
 		verbose_name_plural = '通知番号'
-
-
-
-
-
