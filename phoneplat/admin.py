@@ -69,12 +69,13 @@ class TenantAdmin(admin.ModelAdmin):
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-	list_display = ('name', 'code', 'tenant', 'status')
-	list_display_links = ('name', 'code', 'tenant')
+	list_display = ('name', 'code', 'tenant', 'status', 'updated_date')
+	list_display_links = ('name', 'code', 'tenant', 'updated_date')
 	list_filter = ('name', 'code')
 	search_fields = ('name', 'code')
 	actions_on_bottom = True
 	inlines = [ServiceInline, ]
+	readonly_fields = ['updated_date']
 
 
 @admin.register(Dept)
@@ -146,6 +147,7 @@ class PhoneNumberAdmin(admin.ModelAdmin):
 	list_filter = ('category', 'number', 'status', 'system', 'updated_user')
 	search_fields = ('category', 'number', 'status', 'system', 'updated_user')
 	actions_on_bottom = True
+	readonly_fields = ['updated_date']
 
 
 @admin.register(SurplusNumber)
@@ -155,6 +157,7 @@ class SurplusNumberAdmin(admin.ModelAdmin):
 	list_filter = ('number', 'status', 'system', 'updated_user')
 	search_fields = ('number', 'status', 'system', 'updated_user')
 	actions_on_bottom = True
+	readonly_fields = ['updated_date']
 
 
 @admin.register(Service)
@@ -166,6 +169,7 @@ class ServiceAdmin(admin.ModelAdmin):
 	list_filter = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'updated_user')
 	search_fields = ('number', 'name', 'status', 'team', 'updated_user')
 	actions_on_bottom = True
+	readonly_fields = ['updated_date']
 
 
 @admin.register(AccessLine)
@@ -177,6 +181,7 @@ class AccessLineAdmin(admin.ModelAdmin):
 	list_filter = ('location', 'system', 'status', 'career', 'line_category', 'parent_number', 'updated_user')
 	search_fields = ('location', 'system', 'status', 'career', 'line_category', 'parent_number', 'updated_user')
 	actions_on_bottom = True
+	readonly_fields = ['updated_date']
 
 
 @admin.register(Trank)
@@ -195,6 +200,7 @@ class ScenarioAdmin(admin.ModelAdmin):
 	list_filter = ('service', 'team', 'status', 'updated_user')
 	search_fields = ('service', 'team', 'status', 'updated_user')
 	actions_on_bottom = True 
+	readonly_fields = ['updated_date']
 
 
 @admin.register(TrankInfo)
@@ -222,6 +228,7 @@ class IncomingNumberAdmin(admin.ModelAdmin):
 	list_filter = ('number', 'paying_service', 'status', 'updated_user')
 	search_fields = ('number', 'paying_service', 'status', 'updated_user')
 	actions_on_bottom = True
+	readonly_fields = ['updated_date']
 
 
 @admin.register(PayingCode)
