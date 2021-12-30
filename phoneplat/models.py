@@ -12,7 +12,8 @@ status_choice = (
 	('使用中', '使用中'),
 	('停止中', '停止中'),
 	('廃止予定', '廃止予定'),
-	('廃止中', '廃止中')
+	('廃止中', '廃止中'),
+	('廃止済', '廃止済')
 )
 
 
@@ -180,8 +181,9 @@ class Dept(models.Model):
 		max_length=100
 	)
 
-	code = models.PositiveSmallIntegerField(
-		verbose_name='部門コード'
+	code = models.CharField(
+		verbose_name='部門コード',
+		max_length=8
 	)
 
 	status = models.CharField(
