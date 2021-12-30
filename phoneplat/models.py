@@ -42,8 +42,7 @@ class Site(models.Model):
 
 	updated_date = models.DateTimeField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	updated_user = models.ForeignKey(
@@ -53,10 +52,6 @@ class Site(models.Model):
 		null=True,
 		blank=True
 	)
-
-	def save(self, *args, **kwargs):
-		self.updated_date = timezone.now()
-		super(Site, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.name
@@ -133,6 +128,8 @@ class Team(models.Model):
 
 	start_date = models.DateField(
 		verbose_name='利用開始日',
+		null=True,
+		blank=True
 	)
 
 	end_date = models.DateField(
@@ -151,10 +148,17 @@ class Team(models.Model):
 		verbose_name='按分対象',
 	)
 
-	contact_user = models.ForeignKey(
+	updated_user = models.ForeignKey(
 		User,
 		on_delete=models.CASCADE,
-		verbose_name='担当者',
+		verbose_name='更新者',
+		null=True,
+		blank=True
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		auto_now=True
 	)
 
 	def __str__(self):
@@ -183,11 +187,14 @@ class Dept(models.Model):
 	status = models.CharField(
 		verbose_name='ステータス',
 		max_length=20,
-		choices=dept_choices
+		choices=dept_choices,
+		default='使用中'
 	)
 
 	aggregate_code = models.PositiveSmallIntegerField(
-		verbose_name='集計用コード'
+		verbose_name='集計用コード',
+		null=True,
+		blank=True
 	)
 
 	active = models.BooleanField(
@@ -485,8 +492,7 @@ class PhoneNumber(models.Model):
 
 	updated_date = models.DateTimeField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	updated_user = models.ForeignKey(
@@ -559,8 +565,7 @@ class SurplusNumber(models.Model):
 
 	updated_date = models.DateTimeField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	updated_user = models.ForeignKey(
@@ -667,8 +672,7 @@ class Service(models.Model):
 
 	updated_date = models.DateTimeField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	updated_user = models.ForeignKey(
@@ -781,8 +785,7 @@ class AccessLine(models.Model):
 
 	updated_date = models.DateField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	updated_user = models.ForeignKey(
@@ -874,8 +877,7 @@ class Scenario(models.Model):
 
 	updated_date = models.DateTimeField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	def __str__(self):
@@ -1006,8 +1008,7 @@ class IncomingNumber(models.Model):
 
 	updated_date = models.DateTimeField(
 		verbose_name='更新日',
-		null=True,
-		blank=True
+		auto_now=True
 	)
 
 	def __str__(self):
