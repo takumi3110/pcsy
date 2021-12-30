@@ -78,6 +78,13 @@ class Tenant(models.Model):
 		verbose_name='サイト名',
 	)
 
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=8,
+		choices=status_choice,
+		default='作成中'
+	)
+
 	description = models.TextField(
 		verbose_name='説明',
 		null=True,
