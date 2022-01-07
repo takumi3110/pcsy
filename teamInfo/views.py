@@ -30,3 +30,7 @@ class DeptViewSet(viewsets.ModelViewSet):
     serializer_class = DeptSerializer
     filter_class = DeptFilter
 
+
+class LocationViewSet(viewsets.ModelViewSet):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
