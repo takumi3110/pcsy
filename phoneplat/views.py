@@ -29,6 +29,7 @@ class TeamViewSet(viewsets.ModelViewSet):
 class DeptViewSet(viewsets.ModelViewSet):
     queryset = Dept.objects.all()
     serializer_class = DeptSerializer
+    filter_class = DeptFilter
 
 
 class CareerViewSet(viewsets.ModelViewSet):
@@ -74,6 +75,7 @@ class SurplusNumberViewSet(viewsets.ModelViewSet):
 class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+    filter_class = ServiceFilter
 
 
 class AccessLineViewSet(viewsets.ModelViewSet):
