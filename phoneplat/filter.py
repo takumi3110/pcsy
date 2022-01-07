@@ -1,5 +1,3 @@
-# -*- cording:utf-8 -*-
-
 from django_filters import rest_framework as filters
 
 from .models import *
@@ -15,3 +13,15 @@ class TeamFilter(filters.FilterSet):
 	class Meta:
 		model = Team
 		fields = ['id', 'name', 'code']
+
+
+class DeptFilter(filters.FilterSet):
+	class Meta:
+		model = Dept
+		fields = ['name', 'code']
+
+
+class ServiceFilter(filters.FilterSet):
+	class Meta:
+		model = Service
+		fields = ['id', 'category', 'number', 'team']
