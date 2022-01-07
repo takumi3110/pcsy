@@ -332,7 +332,7 @@ class Service(models.Model):
 	)
 
 	line_category = models.ForeignKey(
-		LineCategory,
+		Category,
 		on_delete=models.CASCADE,
 		verbose_name='回線種別',
 		null=True,
@@ -381,7 +381,7 @@ class AccessLine(models.Model):
 	)
 
 	line_category = models.ForeignKey(
-		LineCategory,
+		Category,
 		on_delete=models.CASCADE,
 		verbose_name='回線種別'
 	)
