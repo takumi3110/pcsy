@@ -4,7 +4,7 @@ from rest_framework import routers
 
 from . import views
 
-app_name = 'phoneplat'
+app_name = 'phonePlat'
 
 router = routers.DefaultRouter()
 router.register(r'system', views.SystemViewSet)

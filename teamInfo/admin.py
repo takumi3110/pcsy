@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import *
-from phoneplat.models import Service
+from phonePlat.models import Service
 
 
 class ServiceInline(admin.TabularInline):
