@@ -7,15 +7,6 @@ from . import views
 app_name = 'phoneplat'
 
 router = routers.DefaultRouter()
-router.register(r'site', views.SiteViewSet)
-router.register(r'tenant', views.TenantViewSet)
-router.register(r'team', views.TeamViewSet)
-router.register(r'dept', views.DeptViewSet)
-router.register(r'career', views.CareerViewSet)
-router.register(r'lineCategory', views.LineCategoryViewSet)
-router.register(r'location', views.LocationViewSet)
-router.register(r'contractNumber', views.ContractNumberViewSet)
-router.register(r'parentNumber', views.ParentNumberViewSet)
 router.register(r'system', views.SystemViewSet)
 router.register(r'phoneNumber', views.PhoneNumberViewSet)
 router.register(r'surplusNumber', views.SurplusNumberViewSet)

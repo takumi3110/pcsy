@@ -8,55 +8,6 @@ from .models import *
 from .filter import *
 
 
-# Create your views here.
-class SiteViewSet(viewsets.ModelViewSet):
-    queryset = Site.objects.all()
-    serializer_class = SiteSerializer
-
-
-class TenantViewSet(viewsets.ModelViewSet):
-    queryset = Tenant.objects.all()
-    serializer_class = TenantSerializer
-    filter_class = TenantFilter
-
-
-class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
-    serializer_class = TeamSerializer
-    filter_class = TeamFilter
-
-
-class DeptViewSet(viewsets.ModelViewSet):
-    queryset = Dept.objects.all()
-    serializer_class = DeptSerializer
-    filter_class = DeptFilter
-
-
-class CareerViewSet(viewsets.ModelViewSet):
-    queryset = Career.objects.all()
-    serializer_class = CareerSerializer
-
-
-class LineCategoryViewSet(viewsets.ModelViewSet):
-    queryset = LineCategory.objects.all()
-    serializer_class = LineCategorySerializer
-
-
-class LocationViewSet(viewsets.ModelViewSet):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
-
-
-class ContractNumberViewSet(viewsets.ModelViewSet):
-    queryset = ContractNumber.objects.all()
-    serializer_class = ContractNumberSerializer
-
-
-class ParentNumberViewSet(viewsets.ModelViewSet):
-    queryset = ParentNumber.objects.all()
-    serializer_class = ParentNumberSerializer
-
-
 class SystemViewSet(viewsets.ModelViewSet):
     queryset = System.objects.all()
     serializer_class = SystemSerializer
