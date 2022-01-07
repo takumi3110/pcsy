@@ -3,6 +3,11 @@ from django_filters import rest_framework as filters
 from .models import *
 
 
+class SiteFilter(filters.FilterSet):
+	model = Site
+	fields = ['name']
+
+
 class TenantFilter(filters.FilterSet):
 	class Meta:
 		model = Tenant
