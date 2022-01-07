@@ -89,7 +89,7 @@ class ContractNumber(models.Model):
 	)
 
 	line_category = models.ForeignKey(
-		LineCategory,
+		Category,
 		on_delete=models.CASCADE,
 		verbose_name='回線種別'
 	)
@@ -133,7 +133,7 @@ class ParentNumber(models.Model):
 	)
 
 	line_category = models.ForeignKey(
-		LineCategory,
+		Category,
 		on_delete=models.CASCADE,
 		verbose_name='回線種別'
 	)

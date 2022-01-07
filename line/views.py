@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from rest_framework import viewsets
+
+from .models import *
+from .serializers import *
 
 
 class CareerViewSet(viewsets.ModelViewSet):
@@ -6,9 +10,9 @@ class CareerViewSet(viewsets.ModelViewSet):
     serializer_class = CareerSerializer
 
 
-class LineCategoryViewSet(viewsets.ModelViewSet):
-    queryset = LineCategory.objects.all()
-    serializer_class = LineCategorySerializer
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
 class ContractNumberViewSet(viewsets.ModelViewSet):

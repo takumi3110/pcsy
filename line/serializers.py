@@ -9,9 +9,9 @@ class CareerSerializer(serializers.ModelSerializer):
 		fields = ('id', 'name',)
 
 
-class LineCategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
 	class Meta:
-		model = LineCategory
+		model = Category
 		fields = ('id', 'name', 'status', 'career')
 
 

@@ -14,8 +14,8 @@ class AccessLineInline(admin.TabularInline):
 	extra = 0
 
 
-class LineCategoryInline(admin.TabularInline):
-	model = LineCategory
+class CategoryInline(admin.TabularInline):
+	model = Category
 	extra = 0
 
 
@@ -29,11 +29,11 @@ class CareerAdmin(admin.ModelAdmin):
 	list_display = ('name',)
 	list_display_links = ('name',)
 	search_fields = ('name',)
-	inlines = [LineCategoryInline]
+	inlines = [CategoryInline]
 
 
-@admin.register(LineCategory)
-class LineCategoryAdmin(admin.ModelAdmin):
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('name', 'career', 'status')
 	list_display_links = ('name', 'career', 'status')
 	list_filter = ('name', 'career', 'status')
