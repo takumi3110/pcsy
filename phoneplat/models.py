@@ -102,8 +102,11 @@ class Team(models.Model):
 		max_length=200
 	)
 
-	code = models.PositiveSmallIntegerField(
+	code = models.CharField(
 		verbose_name='チームNo',
+		max_length=8,
+		null=True,
+		blank=True
 	)
 
 	description = models.TextField(
@@ -116,6 +119,8 @@ class Team(models.Model):
 		Tenant,
 		on_delete=models.CASCADE,
 		verbose_name='テナント',
+		null=True,
+		blank=True
 	)
 
 	bcp_tenant = models.ForeignKey(
@@ -163,7 +168,10 @@ class Team(models.Model):
 	)
 
 	def __str__(self):
-		return f'{self.code} {self.name}'
+		if self.code is None:
+			return self.name
+		else:
+			return f'{self.code} {self.name}'
 
 	class Meta:
 		verbose_name = 'チーム'
@@ -176,21 +184,22 @@ class Dept(models.Model):
 		('閉鎖', '閉鎖')
 	)
 
+	code = models.CharField(
+		verbose_name='部門コード',
+		max_length=16,
+	)
+
 	name = models.CharField(
 		verbose_name='部門名',
 		max_length=100
-	)
-
-	code = models.CharField(
-		verbose_name='部門コード',
-		max_length=8
 	)
 
 	status = models.CharField(
 		verbose_name='ステータス',
 		max_length=20,
 		choices=dept_choices,
-		default='使用中'
+		null=True,
+		blank=True
 	)
 
 	aggregate_code = models.PositiveSmallIntegerField(
@@ -201,6 +210,7 @@ class Dept(models.Model):
 
 	active = models.BooleanField(
 		verbose_name='使用中',
+		default=False
 	)
 
 	team = models.ForeignKey(
@@ -210,10 +220,11 @@ class Dept(models.Model):
 	)
 
 	def save(self, *args, **kwargs):
-		if self.status == '使用中':
-			self.active = True
+		if self.active:
+			self.status = '使用中'
 		else:
-			self.active = False
+			self.status = '閉鎖中'
+		super(Dept, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return f'{self.code} {self.name}'
@@ -588,12 +599,20 @@ class SurplusNumber(models.Model):
 
 class Service(models.Model):
 	category_choice = (
-		('csim', 'csim'),
+		('CSIM', 'CSIM'),
 		('その他', 'その他')
 	)
 
-	number = models.PositiveSmallIntegerField(
-		verbose_name='サービスNo'
+	category = models.CharField(
+		verbose_name='カテゴリー',
+		max_length=8,
+		choices=category_choice,
+		default='CSIM'
+	)
+
+	number = models.CharField(
+		verbose_name='サービスNo',
+		max_length=8
 	)
 
 	name = models.CharField(
@@ -615,10 +634,12 @@ class Service(models.Model):
 
 	holiday = models.BooleanField(
 		verbose_name='祝日設定',
+		default=False
 	)
 
 	always = models.BooleanField(
 		verbose_name='24h/365日対応',
+		default=False
 	)
 
 	start_date = models.DateField(
@@ -646,7 +667,7 @@ class Service(models.Model):
 
 	channel_count = models.PositiveSmallIntegerField(
 		verbose_name='チャンネル数',
-		default=0
+		default=0,
 	)
 
 	description = models.TextField(
@@ -1028,8 +1049,9 @@ class PayingCode(models.Model):
 		('TEMS削除待ち', 'TEMS削除待ち'),
 		('廃止済み', '廃止済み')
 	)
-	code = models.PositiveSmallIntegerField(
+	code = models.CharField(
 		verbose_name='課金コード',
+		max_length=8
 	)
 
 	status = models.CharField(
