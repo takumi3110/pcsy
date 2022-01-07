@@ -26,3 +26,9 @@ class DeptSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Dept
 		fields = ('id', 'code', 'name', 'status', 'aggregate_code', 'active', 'team')
+
+
+class LocationSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Location
+		fields = ('id', 'name', 'address', 'description')

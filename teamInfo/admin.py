@@ -1,6 +1,12 @@
 from django.contrib import admin
 
 from .models import *
+from phoneplat.models import Service
+
+
+class ServiceInline(admin.TabularInline):
+	model = Service
+	extra = 0
 
 
 class TenantInline(admin.TabularInline):
@@ -55,3 +61,11 @@ class DeptAdmin(admin.ModelAdmin):
 	list_filter = ('name', 'code', 'status', 'team')
 	search_fields = ('name', 'code', 'team')
 	actions_on_bottom = True
+
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+	list_display = ('name', 'address')
+	list_display_links = ('name', 'address')
+	list_filter = ('name',)
+	search_fields = ('name',)

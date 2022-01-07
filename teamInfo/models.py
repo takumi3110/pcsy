@@ -1,5 +1,7 @@
 from django.db import models
 
+from user.models import User
+
 status_choice = (
 	('作成中', '作成中'),
 	('使用中', '使用中'),
@@ -225,3 +227,30 @@ class Dept(models.Model):
 	class Meta:
 		verbose_name = '部門'
 		verbose_name_plural = '部門'
+
+
+class Location(models.Model):
+	name = models.CharField(
+		verbose_name='ロケーション',
+		max_length=50
+	)
+
+	address = models.CharField(
+		verbose_name='住所',
+		max_length=255,
+		null=True,
+		blank=True
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = '拠点'
+		verbose_name_plural = '拠点'

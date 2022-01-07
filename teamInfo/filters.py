@@ -18,4 +18,4 @@ class TeamFilter(filters.FilterSet):
 class DeptFilter(filters.FilterSet):
 	class Meta:
 		model = Dept
-		fields = ['name', 'code']
+		fields = ['id', 'name', 'code']
