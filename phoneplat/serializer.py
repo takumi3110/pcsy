@@ -27,7 +27,7 @@ class TeamSerializer(serializers.ModelSerializer):
 class DeptSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Dept
-		fields = ('id', 'name', 'code', 'status', 'aggregate_code', 'active', 'team')
+		fields = ('id', 'code', 'name', 'status', 'aggregate_code', 'active', 'team')
 
 
 class CareerSerializer(serializers.ModelSerializer):
