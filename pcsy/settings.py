@@ -24,7 +24,9 @@ INSTALLED_APPS = [
 	'user',
 	'ldap',
 	'bootstrap4',
-	'phoneplat'
+	'phonePlat',
+	'teamInfo',
+	'line'
 ]
 
 MIDDLEWARE = [
