@@ -14,6 +14,11 @@ class TeamInline(admin.TabularInline):
 	fk_name = 'tenant'
 
 
+class DeptInline(admin.TabularInline):
+	model = Dept
+	extra = 0
+
+
 class LineCategoryInline(admin.TabularInline):
 	model = LineCategory
 	extra = 0
@@ -74,7 +79,7 @@ class TeamAdmin(admin.ModelAdmin):
 	list_filter = ('name', 'code')
 	search_fields = ('name', 'code')
 	actions_on_bottom = True
-	inlines = [ServiceInline, ]
+	inlines = [ServiceInline, DeptInline]
 	readonly_fields = ['updated_date']
 
 
@@ -166,7 +171,7 @@ class ServiceAdmin(admin.ModelAdmin):
 	                'updated_user')
 	list_display_links = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
 	                      'updated_date', 'updated_user')
-	list_filter = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'updated_user')
+	list_filter = ('status', 'holiday', 'always', 'remind', 'team', 'updated_user')
 	search_fields = ('number', 'name', 'status', 'team', 'updated_user')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
