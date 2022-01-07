@@ -11,5 +11,6 @@ router.register(r'site', views.SiteViewSet)
 router.register(r'tenant', views.TenantViewSet)
 router.register(r'team', views.TeamViewSet)
 router.register(r'dept', views.DeptViewSet)
+router.register(r'location', views.LocationViewSet)
 
 urlpatterns = []
