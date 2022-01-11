@@ -11,6 +11,7 @@ from .filters import *
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
+    filter_class = SiteFilter
 
 
 class TenantViewSet(viewsets.ModelViewSet):
