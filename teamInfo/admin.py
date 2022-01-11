@@ -27,10 +27,10 @@ class DeptInline(admin.TabularInline):
 
 @admin.register(Site)
 class SiteAdmin(admin.ModelAdmin):
-	list_display = ('name', 'status')
-	list_display_links = ('name',)
-	list_filter = ('name', 'status')
-	search_fields = ('name',)
+	list_display = ('name', 'category', 'status')
+	list_display_links = ('name', 'category')
+	list_filter = ('name', 'category', 'status')
+	search_fields = ('name', 'category')
 	inlines = [TenantInline]
 
 
@@ -47,7 +47,7 @@ class TenantAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
 	list_display = ('name', 'code', 'tenant', 'status', 'updated_date')
 	list_display_links = ('name', 'code', 'tenant', 'updated_date')
-	list_filter = ('name', 'code')
+	list_filter = ('tenant', 'status')
 	search_fields = ('name', 'code')
 	actions_on_bottom = True
 	inlines = [ServiceInline, DeptInline]
