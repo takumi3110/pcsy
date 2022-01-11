@@ -76,7 +76,7 @@ class AccessLineAdmin(admin.ModelAdmin):
 	list_display_links = ('location', 'system', 'status', 'parent_number', 'opening_date', 'updated_date',
 	                      'updated_user')
 	list_filter = ('location', 'system', 'status', 'parent_number', 'updated_user')
-	search_fields = ('location', 'system', 'status', 'parent_number__number', 'updated_user')
+	search_fields = ('location__name', 'system__name', 'status', 'parent_number__number', 'updated_user__screenname')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
 
