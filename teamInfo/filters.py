@@ -4,8 +4,9 @@ from .models import *
 
 
 class SiteFilter(filters.FilterSet):
-	model = Site
-	fields = ['name']
+	class Meta:
+		model = Site
+		fields = ['name', 'category']
 
 
 class TenantFilter(filters.FilterSet):
