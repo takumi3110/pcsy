@@ -48,12 +48,12 @@ class SurplusNumberAdmin(admin.ModelAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-	list_display = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date', 'updated_date',
-	                'updated_user')
+	list_display = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
+	                'updated_date', 'updated_user')
 	list_display_links = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
 	                      'updated_date', 'updated_user')
-	list_filter = ('status', 'holiday', 'always', 'remind', 'team', 'updated_user')
-	search_fields = ('number', 'name', 'status', 'team', 'updated_user')
+	list_filter = ('category', 'status', 'holiday', 'always', 'remind', 'team', 'updated_user')
+	search_fields = ('number', 'name', 'status', 'team__code', 'updated_user__screenname')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
 
