@@ -25,3 +25,9 @@ class DeptFilter(filters.FilterSet):
 	class Meta:
 		model = Dept
 		fields = ['id', 'name', 'code']
+
+
+class LocationFilter(filters.FilterSet):
+	class Meta:
+		model = Location
+		fields = ['name']

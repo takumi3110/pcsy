@@ -35,3 +35,4 @@ class DeptViewSet(viewsets.ModelViewSet):
 class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+    filter_class = LocationFilter
