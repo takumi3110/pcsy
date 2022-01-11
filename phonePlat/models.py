@@ -365,25 +365,15 @@ class AccessLine(models.Model):
 	system = models.ForeignKey(
 		System,
 		on_delete=models.CASCADE,
-		verbose_name='システム'
+		verbose_name='システム',
+		null=True,
+		blank=True
 	)
 
 	status = models.CharField(
 		verbose_name='ステータス',
 		max_length=10,
 		choices=status_choice
-	)
-
-	career = models.ForeignKey(
-		Career,
-		on_delete=models.CASCADE,
-		verbose_name='キャリア'
-	)
-
-	line_category = models.ForeignKey(
-		Category,
-		on_delete=models.CASCADE,
-		verbose_name='回線種別'
 	)
 
 	parent_number = models.ForeignKey(
@@ -401,11 +391,14 @@ class AccessLine(models.Model):
 	contract_number = models.ForeignKey(
 		ContractNumber,
 		on_delete=models.CASCADE,
-		verbose_name='契約番号'
+		verbose_name='契約番号',
+		null=True,
+		blank=True
 	)
 
 	proportion = models.BooleanField(
-		verbose_name='按分集計対象'
+		verbose_name='按分集計対象',
+		default=False
 	)
 
 	surplus_count = models.PositiveSmallIntegerField(
@@ -413,7 +406,7 @@ class AccessLine(models.Model):
 		default=0
 	)
 
-	allowance_count = models.PositiveSmallIntegerField(
+	allowance_count = models.SmallIntegerField(
 		verbose_name='余裕数',
 		default=0
 	)
@@ -431,11 +424,13 @@ class AccessLine(models.Model):
 	updated_user = models.ForeignKey(
 		User,
 		on_delete=models.CASCADE,
-		verbose_name='更新者'
+		verbose_name='更新者',
+		null=True,
+		blank=True
 	)
 
 	def __str__(self):
-		return f'{self.parent_number.number} {self.location.name}'
+		return f'{self.parent_number.number} {self.location.name} ({self.location.ridge})'
 
 	class Meta:
 		verbose_name = 'アクセス回線'
