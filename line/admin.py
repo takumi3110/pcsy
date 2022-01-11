@@ -38,7 +38,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display_links = ('name', 'career', 'status')
 	list_filter = ('name', 'career', 'status')
 	search_fields = ('name', 'career', 'status')
-	inlines = [ServiceInline, AccessLineInline]
+	inlines = [ServiceInline, ParentNumberInline]
 
 
 @admin.register(ContractNumber)
