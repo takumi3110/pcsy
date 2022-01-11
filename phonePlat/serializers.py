@@ -35,9 +35,8 @@ class ServiceSerializer(serializers.ModelSerializer):
 class AccessLineSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = AccessLine
-		fields = ('id', 'location', 'system', 'status', 'career', 'line_category', 'parent_number', 'opening_date',
-		          'contract_number', 'proportion', 'surplus_count', 'allows_count', 'threshold_value', 'updated_date',
-		          'updated_user')
+		fields = ('id', 'location', 'system', 'status', 'parent_number', 'opening_date', 'contract_number', 'proportion',
+		          'surplus_count', 'allowance_count', 'threshold_value', 'updated_date', 'updated_user')
 
 
 class TrankSerializer(serializers.ModelSerializer):
