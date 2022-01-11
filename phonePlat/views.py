@@ -3,9 +3,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets
 
-from .serializer import *
+from .serializers import *
 from .models import *
-from .filter import *
+from .filters import *
 
 
 class SystemViewSet(viewsets.ModelViewSet):
@@ -42,6 +42,7 @@ class TrankViewSet(viewsets.ModelViewSet):
 class ScenarioViewSet(viewsets.ModelViewSet):
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
+    filter_class = ScenarioFilter
 
 
 class TrankInfoViewSet(viewsets.ModelViewSet):
