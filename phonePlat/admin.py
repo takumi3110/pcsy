@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.forms import Textarea
+from django.db import models
 
 from .models import *
 
@@ -50,12 +52,22 @@ class SurplusNumberAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
 	list_display = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
 	                'updated_date', 'updated_user')
-	list_display_links = ('number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
+	list_display_links = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
 	                      'updated_date', 'updated_user')
 	list_filter = ('category', 'status', 'holiday', 'always', 'remind', 'team', 'updated_user')
 	search_fields = ('number', 'name', 'status', 'team__code', 'updated_user__screenname')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
+	formfield_overrides = {
+		models.TextField: {
+			'widget': Textarea(
+				attrs={
+					'rows': 2,
+					'cols': 40
+				}
+			)
+		}
+	}
 
 
 @admin.register(AccessLine)
@@ -87,6 +99,16 @@ class ScenarioAdmin(admin.ModelAdmin):
 	search_fields = ('service', 'team', 'status', 'updated_user')
 	actions_on_bottom = True 
 	readonly_fields = ['updated_date']
+	formfield_overrides = {
+		models.TextField: {
+			'widget': Textarea(
+				attrs={
+					'rows': 3,
+					'cols': 80
+				}
+			)
+		}
+	}
 
 
 @admin.register(TrankInfo)
