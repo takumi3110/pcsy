@@ -72,12 +72,11 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(AccessLine)
 class AccessLineAdmin(admin.ModelAdmin):
-	list_display = ('location', 'system', 'status', 'career', 'line_category', 'parent_number', 'opening_date',
-	                'updated_date', 'updated_user')
-	list_display_links = ('location', 'system', 'status', 'career', 'line_category', 'parent_number',
-	                      'opening_date', 'updated_date', 'updated_user')
-	list_filter = ('location', 'system', 'status', 'career', 'line_category', 'parent_number', 'updated_user')
-	search_fields = ('location', 'system', 'status', 'career', 'line_category', 'parent_number', 'updated_user')
+	list_display = ('location', 'system', 'status', 'parent_number', 'opening_date', 'updated_date', 'updated_user')
+	list_display_links = ('location', 'system', 'status', 'parent_number', 'opening_date', 'updated_date',
+	                      'updated_user')
+	list_filter = ('location', 'system', 'status', 'parent_number', 'updated_user')
+	search_fields = ('location', 'system', 'status', 'parent_number__number', 'updated_user')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
 
