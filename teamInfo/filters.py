@@ -30,4 +30,4 @@ class DeptFilter(filters.FilterSet):
 class LocationFilter(filters.FilterSet):
 	class Meta:
 		model = Location
-		fields = ['name']
+		fields = ['name', 'ridge']

@@ -238,7 +238,12 @@ class Dept(models.Model):
 
 class Location(models.Model):
 	name = models.CharField(
-		verbose_name='ロケーション',
+		verbose_name='拠点名',
+		max_length=50
+	)
+
+	ridge = models.CharField(
+		verbose_name='棟',
 		max_length=50
 	)
 
@@ -256,7 +261,7 @@ class Location(models.Model):
 	)
 
 	def __str__(self):
-		return self.name
+		return f'{self.name} ({self.ridge})'
 
 	class Meta:
 		verbose_name = '拠点'

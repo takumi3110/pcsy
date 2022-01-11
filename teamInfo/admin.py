@@ -81,7 +81,7 @@ class DeptAdmin(admin.ModelAdmin):
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-	list_display = ('name', 'address')
-	list_display_links = ('name', 'address')
+	list_display = ('name', 'ridge', 'address')
+	list_display_links = ('name', 'ridge', 'address')
 	list_filter = ('name',)
-	search_fields = ('name',)
+	search_fields = ['name']
