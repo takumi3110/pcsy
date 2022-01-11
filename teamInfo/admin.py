@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.forms import Textarea
+from django.db import models
 
 from .models import *
 from phonePlat.models import Service
@@ -7,6 +9,20 @@ from phonePlat.models import Service
 class ServiceInline(admin.TabularInline):
 	model = Service
 	extra = 0
+	fields = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
+	          'remind', 'description')
+	readonly_fields = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
+	                   'remind')
+	formfield_overrides = {
+		models.TextField: {
+			'widget': Textarea(
+				attrs={
+					'rows': 1,
+					'cols': 40
+				}
+			)
+		}
+	}
 
 
 class TenantInline(admin.TabularInline):
@@ -48,7 +64,7 @@ class TeamAdmin(admin.ModelAdmin):
 	list_display = ('name', 'code', 'tenant', 'status', 'updated_date')
 	list_display_links = ('name', 'code', 'tenant', 'updated_date')
 	list_filter = ('tenant', 'status')
-	search_fields = ('name', 'code')
+	search_fields = ('name', 'code', 'tenant__name')
 	actions_on_bottom = True
 	inlines = [ServiceInline, DeptInline]
 	readonly_fields = ['updated_date']
@@ -59,7 +75,7 @@ class DeptAdmin(admin.ModelAdmin):
 	list_display = ('name', 'code', 'team', 'status', 'active')
 	list_display_links = ('name', 'code', 'team')
 	list_filter = ('name', 'code', 'status', 'team')
-	search_fields = ('name', 'code', 'team')
+	search_fields = ('name', 'code', 'team__code')
 	actions_on_bottom = True
 
 
