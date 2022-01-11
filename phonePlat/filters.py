@@ -13,3 +13,9 @@ class ScenarioFilter(filters.FilterSet):
 	class Meta:
 		model = Scenario
 		fields = ['id', 'number', 'name', 'service', 'team']
+
+
+class AccessLineFilter(filters.FilterSet):
+	class Meta:
+		model = AccessLine
+		fields = ['id', 'location', 'system', 'status', 'parent_number', 'contract_number', 'updated_user']

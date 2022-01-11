@@ -32,6 +32,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
 class AccessLineViewSet(viewsets.ModelViewSet):
     queryset = AccessLine.objects.all()
     serializer_class = AccessLineSerializer
+    filter_class = AccessLineFilter
 
 
 class TrankViewSet(viewsets.ModelViewSet):
