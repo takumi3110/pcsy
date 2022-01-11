@@ -72,13 +72,15 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(AccessLine)
 class AccessLineAdmin(admin.ModelAdmin):
-	list_display = ('location', 'system', 'status', 'parent_number', 'opening_date', 'updated_date', 'updated_user')
-	list_display_links = ('location', 'system', 'status', 'parent_number', 'opening_date', 'updated_date',
-	                      'updated_user')
+	list_display = ('parent_number', 'location', 'system', 'status', 'surplus_count', 'allowance_count', 'updated_date',
+	                'updated_user')
+	list_display_links = ('parent_number', 'location', 'system', 'status', 'surplus_count', 'allowance_count',
+	                      'updated_date', 'updated_user')
 	list_filter = ('location', 'system', 'status', 'parent_number', 'updated_user')
 	search_fields = ('location__name', 'system__name', 'status', 'parent_number__number', 'updated_user__screenname')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
+	ordering = ['id']
 
 
 @admin.register(Trank)
