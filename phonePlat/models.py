@@ -224,12 +224,12 @@ class Service(models.Model):
 		verbose_name='カテゴリー',
 		max_length=8,
 		choices=category_choice,
-		default='CSIM'
 	)
 
 	number = models.CharField(
 		verbose_name='サービスNo',
-		max_length=8
+		max_length=8,
+		blank=True
 	)
 
 	name = models.CharField(
@@ -488,7 +488,9 @@ class Scenario(models.Model):
 	service = models.ForeignKey(
 		Service,
 		on_delete=models.CASCADE,
-		verbose_name='サービス名'
+		verbose_name='サービス名',
+		null=True,
+		blank=True
 	)
 
 	team = models.ForeignKey(
@@ -512,7 +514,9 @@ class Scenario(models.Model):
 	updated_user = models.ForeignKey(
 		User,
 		on_delete=models.CASCADE,
-		verbose_name='更新者'
+		verbose_name='更新者',
+		null=True,
+		blank=True
 	)
 
 	updated_date = models.DateTimeField(
@@ -521,7 +525,7 @@ class Scenario(models.Model):
 	)
 
 	def __str__(self):
-		return f'{self.number}{self.name}'
+		return f'{self.number} {self.name}'
 
 	class Meta:
 		verbose_name = 'シナリオ'
