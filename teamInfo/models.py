@@ -15,7 +15,14 @@ status_choice = (
 class Site(models.Model):
 	name = models.CharField(
 		verbose_name='サイト名',
-		max_length=200
+		max_length=50
+	)
+
+	category = models.CharField(
+		verbose_name='カテゴリー',
+		max_length=50,
+		null=True,
+		blank=True
 	)
 
 	description = models.TextField(
@@ -50,7 +57,7 @@ class Site(models.Model):
 	)
 
 	def __str__(self):
-		return self.name
+		return f'{self.name} ({self.category})'
 
 	class Meta:
 		verbose_name = 'サイト'
