@@ -27,9 +27,9 @@ class SurplusNumberSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Service
-		fields = ('id', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date', 'remind',
-		          'channel_count', 'description', 'mail_address', 'file', 'version', 'updated_date', 'updated_user',
-		          'contract_number', 'line_category', 'parent_number')
+		fields = ('id', 'category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
+		          'remind', 'channel_count', 'description', 'mail_address', 'file', 'version', 'updated_date',
+		          'updated_user', 'contract_number', 'line_category', 'parent_number')
  
  
 class AccessLineSerializer(serializers.ModelSerializer):
