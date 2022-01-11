@@ -6,7 +6,7 @@ from .models import *
 class SiteSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Site
-		fields = ('id', 'name', 'status', 'description', 'version', 'updated_date', 'updated_user')
+		fields = ('id', 'name', 'category', 'status', 'description', 'version', 'updated_date', 'updated_user')
 
 
 class TenantSerializer(serializers.ModelSerializer):
