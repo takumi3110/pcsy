@@ -25,4 +25,4 @@ class ContractNumberSerializer(serializers.ModelSerializer):
 class ParentNumberSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ParentNumber
-		fields = ('id', 'number', 'career', 'status', 'line_category', 'description')
+		fields = ('id', 'number', 'status', 'line_category', 'description')

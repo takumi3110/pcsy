@@ -120,12 +120,6 @@ class ParentNumber(models.Model):
 		max_length=100
 	)
 
-	career = models.ForeignKey(
-		Career,
-		on_delete=models.CASCADE,
-		verbose_name='キャリア'
-	)
-
 	status = models.CharField(
 		verbose_name='ステータス',
 		max_length=10,

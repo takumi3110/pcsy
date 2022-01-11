@@ -24,4 +24,4 @@ class ContractNumberFilter(filters.FilterSet):
 class ParentNumberFilter(filters.FilterSet):
 	class Meta:
 		model = ParentNumber
-		fields = ['number', 'career', 'line_category']
+		fields = ['number', 'line_category']

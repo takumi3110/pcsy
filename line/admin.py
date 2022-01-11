@@ -37,7 +37,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('name', 'career', 'status')
 	list_display_links = ('name', 'career', 'status')
 	list_filter = ('name', 'career', 'status')
-	search_fields = ('name', 'career', 'status')
+	search_fields = ('name', 'career__name')
 	inlines = [ServiceInline, ParentNumberInline]
 
 
@@ -53,9 +53,9 @@ class ContractNumberAdmin(admin.ModelAdmin):
 
 @admin.register(ParentNumber)
 class ParentNumberAdmin(admin.ModelAdmin):
-	list_display = ('number', 'career', 'status', 'line_category')
-	list_display_links = ('number', 'career', 'status', 'line_category')
-	list_filter = ('number', 'career', 'status', 'line_category')
-	search_fields = ('number', 'career', 'line_category')
+	list_display = ('number', 'status', 'line_category')
+	list_display_links = ('number', 'status', 'line_category')
+	list_filter = ('number', 'status', 'line_category')
+	search_fields = ('number', 'line_category__name')
 	actions_on_bottom = True
 	inlines = [ServiceInline, AccessLineInline]
