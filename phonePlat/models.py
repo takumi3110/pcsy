@@ -663,7 +663,7 @@ class PayingCode(models.Model):
 		('余剰', '余剰'),
 		('使用中', '使用中'),
 		('TEMS削除待ち', 'TEMS削除待ち'),
-		('廃止済み', '廃止済み')
+		('廃止済', '廃止済')
 	)
 	code = models.CharField(
 		verbose_name='課金コード',
@@ -679,7 +679,9 @@ class PayingCode(models.Model):
 	service = models.ForeignKey(
 		Service,
 		on_delete=models.CASCADE,
-		verbose_name='サービス名'
+		verbose_name='サービス名',
+		null=True,
+		blank=True
 	)
 
 	dept = models.ForeignKey(
@@ -690,7 +692,9 @@ class PayingCode(models.Model):
 
 	target = models.CharField(
 		verbose_name='対象DID',
-		max_length=16
+		max_length=16,
+		null=True,
+		blank=True
 	)
 
 	start_date = models.DateField(
@@ -710,7 +714,9 @@ class PayingCode(models.Model):
 	)
 
 	tems_date = models.DateField(
-		verbose_name='TEMS反映日'
+		verbose_name='TEMS反映日',
+		null=True,
+		blank=True
 	)
 
 	file = models.FileField(
