@@ -62,8 +62,8 @@ class TenantAdmin(admin.ModelAdmin):
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-	list_display = ('name', 'code', 'tenant', 'status', 'updated_date')
-	list_display_links = ('name', 'code', 'tenant', 'updated_date')
+	list_display = ('code', 'name', 'tenant', 'status', 'updated_date')
+	list_display_links = ('code', 'name', 'tenant', 'updated_date')
 	list_filter = ('tenant', 'status')
 	search_fields = ('name', 'code', 'tenant__name')
 	actions_on_bottom = True
