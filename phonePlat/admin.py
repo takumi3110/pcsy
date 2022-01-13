@@ -123,10 +123,10 @@ class TrankInfoAdmin(admin.ModelAdmin):
 
 @admin.register(PayingService)
 class PayingServiceAdmin(admin.ModelAdmin):
-	list_display = ('name', 'career')
-	list_display_links = ('name', 'career')
+	list_display = ('abbreviation', 'name', 'career')
+	list_display_links = ('abbreviation', 'name', 'career')
 	list_filter = ('name', 'career')
-	search_fields = ('name', 'career')
+	search_fields = ('abbreviation', 'name', 'career')
 	actions_on_bottom = True 
 
 

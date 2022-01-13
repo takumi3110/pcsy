@@ -575,6 +575,12 @@ class PayingService(models.Model):
 		max_length=50
 	)
 
+	abbreviation = models.CharField(
+		verbose_name='略称',
+		max_length=12,
+		blank=True
+	)
+
 	career = models.ForeignKey(
 		Career,
 		on_delete=models.CASCADE,
@@ -582,7 +588,10 @@ class PayingService(models.Model):
 	)
 
 	def __str__(self):
-		return f'{self.name} {self.career.name}'
+		if self.abbreviation == '':
+			return self.name
+		else:
+			return f'{self.abbreviation}({self.name})'
 
 	class Meta:
 		verbose_name = '着信課金サービス'
@@ -622,6 +631,14 @@ class IncomingNumber(models.Model):
 		verbose_name='FD-CH数'
 	)
 
+	service = models.ForeignKey(
+		Service,
+		on_delete=models.CASCADE,
+		verbose_name='サービス',
+		null=True,
+		blank=True
+	)
+
 	start_date = models.DateField(
 		verbose_name='利用開始日',
 		null=True,
@@ -642,7 +659,9 @@ class IncomingNumber(models.Model):
 	updated_user = models.ForeignKey(
 		User,
 		on_delete=models.CASCADE,
-		verbose_name='更新者'
+		verbose_name='更新者',
+		null=True,
+		blank=True
 	)
 
 	updated_date = models.DateTimeField(
