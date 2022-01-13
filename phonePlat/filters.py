@@ -3,6 +3,12 @@ from django_filters import rest_framework as filters
 from .models import *
 
 
+class SystemFilter(filters.FilterSet):
+	class Meta:
+		model = System
+		fields = ['id', 'name']
+
+
 class ServiceFilter(filters.FilterSet):
 	class Meta:
 		model = Service
