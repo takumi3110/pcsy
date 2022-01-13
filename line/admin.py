@@ -1,7 +1,12 @@
 from django.contrib import admin
 
 from .models import *
-from phonePlat.models import Service, AccessLine
+from phonePlat.models import Service, AccessLine, PayingService
+
+
+class PayingServiceInline(admin.TabularInline):
+	model = PayingService
+	extra = 0
 
 
 class ServiceInline(admin.TabularInline):
@@ -29,7 +34,7 @@ class CareerAdmin(admin.ModelAdmin):
 	list_display = ('name',)
 	list_display_links = ('name',)
 	search_fields = ('name',)
-	inlines = [CategoryInline]
+	inlines = [CategoryInline, PayingServiceInline]
 
 
 @admin.register(Category)
