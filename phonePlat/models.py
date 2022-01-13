@@ -653,7 +653,9 @@ class IncomingNumber(models.Model):
 
 	country = models.CharField(
 		verbose_name='提供対地',
-		max_length=50
+		max_length=50,
+		null=True,
+		blank=True
 	)
 
 	description = models.TextField(
