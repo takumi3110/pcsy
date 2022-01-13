@@ -612,7 +612,7 @@ class IncomingNumber(models.Model):
 
 	number = models.CharField(
 		verbose_name='着信課金番号',
-		max_length=16
+		max_length=32
 	)
 
 	paying_service = models.ForeignKey(
@@ -630,11 +630,19 @@ class IncomingNumber(models.Model):
 	holder = models.CharField(
 		verbose_name='名義',
 		max_length=4,
-		choices=holder_choice
+		choices=holder_choice,
+		null=True,
+		blank=True
 	)
 
 	channel_count = models.PositiveSmallIntegerField(
 		verbose_name='FD-CH数'
+	)
+
+	target_did = models.CharField(
+		verbose_name='対象DID',
+		max_length=24,
+		blank=True
 	)
 
 	service = models.ForeignKey(
