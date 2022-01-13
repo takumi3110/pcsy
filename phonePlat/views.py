@@ -11,16 +11,19 @@ from .filters import *
 class SystemViewSet(viewsets.ModelViewSet):
     queryset = System.objects.all()
     serializer_class = SystemSerializer
+    filter_class = SystemFilter
 
 
 class PhoneNumberViewSet(viewsets.ModelViewSet):
     queryset = PhoneNumber.objects.all()
     serializer_class = PhoneNumberSerializer
+    filter_class = PhoneNumberFilter
 
 
 class SurplusNumberViewSet(viewsets.ModelViewSet):
     queryset = SurplusNumber.objects.all()
     serializer_class = SurplusNumberSerializer
+    filter_class = SurplusNumberFilter
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
@@ -38,6 +41,7 @@ class AccessLineViewSet(viewsets.ModelViewSet):
 class TrankViewSet(viewsets.ModelViewSet):
     queryset = Trank.objects.all()
     serializer_class = TrankSerializer
+    filter_class = TrankFilter
 
 
 class ScenarioViewSet(viewsets.ModelViewSet):
@@ -49,23 +53,28 @@ class ScenarioViewSet(viewsets.ModelViewSet):
 class TrankInfoViewSet(viewsets.ModelViewSet):
     queryset = TrankInfo.objects.all()
     serializer_class = TrankInfoSerializer
+    filter_class = TrankInfoFilter
 
 
 class PayingServiceViewSet(viewsets.ModelViewSet):
     queryset = PayingService.objects.all()
     serializer_class = PayingServiceSerializer
+    filter_class = PayingServiceFilter
 
 
 class IncomingNumberViewSet(viewsets.ModelViewSet):
     queryset = IncomingNumber.objects.all()
     serializer_class = IncomingNumberSerializer
+    filter_class = IncomingNumberFilter
 
 
 class PayingCodeViewSet(viewsets.ModelViewSet):
     queryset = PayingCode.objects.all()
     serializer_class = PayingCodeSerializer
+    filter_class = PayingCodeFilter
 
 
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+    filter_class = NotificationFilter
