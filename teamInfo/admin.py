@@ -9,6 +9,7 @@ from phonePlat.models import Service
 class ServiceInline(admin.TabularInline):
 	model = Service
 	extra = 0
+	ordering = ['number']
 	fields = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
 	          'remind', 'description')
 	readonly_fields = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
