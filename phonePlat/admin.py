@@ -96,8 +96,8 @@ class TrankAdmin(admin.ModelAdmin):
 class ScenarioAdmin(admin.ModelAdmin):
 	list_display = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
 	list_display_links = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
-	list_filter = ('service', 'team', 'status', 'updated_user')
-	search_fields = ('service', 'team', 'status', 'updated_user')
+	list_filter = ('status', 'updated_user')
+	search_fields = ('number', 'name', 'service__number', 'team__name')
 	actions_on_bottom = True 
 	readonly_fields = ['updated_date']
 	formfield_overrides = {
