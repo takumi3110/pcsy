@@ -69,6 +69,7 @@ class TeamAdmin(admin.ModelAdmin):
 	actions_on_bottom = True
 	inlines = [ServiceInline, DeptInline]
 	readonly_fields = ['updated_date']
+	ordering = ['code']
 
 
 @admin.register(Dept)
