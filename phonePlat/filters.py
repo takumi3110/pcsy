@@ -12,7 +12,7 @@ class SystemFilter(filters.FilterSet):
 class ServiceFilter(filters.FilterSet):
 	class Meta:
 		model = Service
-		fields = ['id', 'category', 'number', 'team']
+		fields = ['id', 'category', 'number', 'name', 'team']
 
 
 class ScenarioFilter(filters.FilterSet):
@@ -60,7 +60,7 @@ class PayingServiceFilter(filters.FilterSet):
 class IncomingNumberFilter(filters.FilterSet):
 	class Meta:
 		model = IncomingNumber
-		fields = ['id', 'number', 'paying_service', 'holder', 'service']
+		fields = ['id', 'number', 'paying_service', 'holder', 'service', 'target_did']
 
 
 class PayingCodeFilter(filters.FilterSet):
