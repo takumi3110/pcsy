@@ -32,188 +32,6 @@ class System(models.Model):
 		verbose_name_plural = 'システム'
 
 
-class PhoneNumber(models.Model):
-	category_choice = (
-		('csim', 'CSIM'),
-		('others', '他システム'),
-		('fax', '実回線、FAX'),
-		('outgoing', '発信専用番号'),
-		('surplus', '余剰')
-	)
-
-	paying_choice = (
-		('自課金', '自課金'),
-		('その他', 'その他')
-	)
-
-	category = models.CharField(
-		verbose_name='カテゴリー',
-		max_length=20,
-		choices=category_choice
-	)
-
-	number = models.CharField(
-		verbose_name='電話番号',
-		max_length=16,
-		# validators=[]
-
-	)
-
-	status = models.CharField(
-		verbose_name='ステータス',
-		max_length=10,
-		choices=status_choice
-	)
-
-	system = models.ForeignKey(
-		System,
-		on_delete=models.CASCADE,
-		verbose_name='システム'
-	)
-
-	opening_date = models.DateField(
-		verbose_name='番号開通日',
-		null=True,
-		blank=True
-	)
-
-	end_date = models.DateField(
-		verbose_name='番号廃止日',
-		null=True,
-		blank=True
-	)
-
-	start_date = models.DateField(
-		verbose_name='利用開始日',
-		null=True,
-		blank=True
-	)
-
-	obsolete_date = models.DateField(
-		verbose_name='利用終了日',
-		null=True,
-		blank=True
-	)
-
-	interrupt_date = models.DateField(
-		verbose_name='割り込み申込日',
-		null=True,
-		blank=True
-	)
-
-	paying = models.CharField(
-		verbose_name='課金先',
-		max_length=10,
-		choices=paying_choice
-	)
-
-	ticket = models.CharField(
-		verbose_name='チケット番号',
-		max_length=20,
-		null=True,
-		blank=True
-	)
-
-	description = models.TextField(
-		verbose_name='説明',
-		null=True,
-		blank=True
-	)
-
-	updated_date = models.DateTimeField(
-		verbose_name='更新日',
-		auto_now=True
-	)
-
-	updated_user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-		verbose_name='更新者',
-		null=True,
-		blank=True
-	)
-
-	def __str__(self):
-		return self.number
-
-	class Meta:
-		verbose_name = '電話番号'
-		verbose_name_plural = '電話番号'
-
-
-class SurplusNumber(models.Model):
-	surplus_choice = (
-		('ダミー', 'ダミー'),
-		('余剰', '余剰'),
-		('予約中', '予約中'),
-		('使用中', '使用中'),
-		('廃止予定', '廃止予定'),
-		('廃止済', '廃止済'),
-	)
-
-	number = models.CharField(
-		verbose_name='余剰電話番号',
-		max_length=20
-	)
-
-	status = models.CharField(
-		verbose_name='ステータス',
-		max_length=10,
-		choices=surplus_choice
-	)
-
-	system = models.ForeignKey(
-		System,
-		on_delete=models.CASCADE,
-		verbose_name='システム',
-	)
-
-	opening_date = models.DateField(
-		verbose_name='番号開通日',
-		null=True,
-		blank=True
-	)
-
-	end_date = models.DateField(
-		verbose_name='番号廃止日',
-		null=True,
-		blank=True
-	)
-
-	ticket = models.CharField(
-		verbose_name='チケット番号',
-		max_length=20,
-		null=True,
-		blank=True
-	)
-
-	description = models.TextField(
-		verbose_name='説明',
-		null=True,
-		blank=True
-	)
-
-	updated_date = models.DateTimeField(
-		verbose_name='更新日',
-		auto_now=True
-	)
-
-	updated_user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-		verbose_name='更新者',
-		null=True,
-		blank=True
-	)
-
-	def __str__(self):
-		return self.number
-
-	class Meta:
-		verbose_name = '電話番号（余剰）'
-		verbose_name_plural = '電話番号（余剰）'
-
-
 class Service(models.Model):
 	category_choice = (
 		('CSIM', 'CSIM'),
@@ -355,6 +173,252 @@ class Service(models.Model):
 		verbose_name_plural = 'サービス'
 
 
+class Scenario(models.Model):
+	number = models.CharField(
+		verbose_name='シナリオNo',
+		max_length=50
+	)
+
+	name = models.CharField(
+		verbose_name='シナリオ名',
+		max_length=100
+	)
+
+	service = models.ForeignKey(
+		Service,
+		on_delete=models.CASCADE,
+		verbose_name='サービス名',
+		null=True,
+		blank=True
+	)
+
+	team = models.ForeignKey(
+		Team,
+		on_delete=models.CASCADE,
+		verbose_name='チーム名'
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=status_choice
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者',
+		null=True,
+		blank=True
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		auto_now=True
+	)
+
+	def __str__(self):
+		return f'{self.number} {self.name}'
+
+	class Meta:
+		verbose_name = 'シナリオ'
+		verbose_name_plural = 'シナリオ'
+
+
+class PhoneNumber(models.Model):
+	category_choice = (
+		('csim', 'CSIM'),
+		('others', '他システム'),
+		('fax', '実回線、FAX'),
+		('outgoing', '発信専用番号'),
+		('surplus', '余剰')
+	)
+
+	paying_choice = (
+		('自課金', '自課金'),
+		('その他', 'その他')
+	)
+
+	category = models.CharField(
+		verbose_name='カテゴリー',
+		max_length=20,
+		choices=category_choice
+	)
+
+	number = models.CharField(
+		verbose_name='電話番号',
+		max_length=16,
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=status_choice
+	)
+
+	system = models.ForeignKey(
+		System,
+		on_delete=models.CASCADE,
+		verbose_name='システム'
+	)
+
+	opening_date = models.DateField(
+		verbose_name='番号開通日',
+		null=True,
+		blank=True
+	)
+
+	end_date = models.DateField(
+		verbose_name='番号廃止日',
+		null=True,
+		blank=True
+	)
+
+	start_date = models.DateField(
+		verbose_name='利用開始日',
+		null=True,
+		blank=True
+	)
+
+	obsolete_date = models.DateField(
+		verbose_name='利用終了日',
+		null=True,
+		blank=True
+	)
+
+	interrupt_date = models.DateField(
+		verbose_name='割り込み申込日',
+		null=True,
+		blank=True
+	)
+
+	paying = models.CharField(
+		verbose_name='課金先',
+		max_length=10,
+		choices=paying_choice
+	)
+
+	scenario = models.ForeignKey(
+		Scenario,
+		on_delete=models.CASCADE,
+		verbose_name='シナリオ',
+		null=True,
+		blank=True
+	)
+
+	ticket = models.CharField(
+		verbose_name='チケット番号',
+		max_length=20,
+		null=True,
+		blank=True
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		auto_now=True
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.number
+
+	class Meta:
+		verbose_name = '電話番号'
+		verbose_name_plural = '電話番号'
+
+
+class SurplusNumber(models.Model):
+	surplus_choice = (
+		('ダミー', 'ダミー'),
+		('余剰', '余剰'),
+		('予約中', '予約中'),
+		('使用中', '使用中'),
+		('廃止予定', '廃止予定'),
+		('廃止済', '廃止済'),
+	)
+
+	number = models.CharField(
+		verbose_name='余剰電話番号',
+		max_length=20
+	)
+
+	status = models.CharField(
+		verbose_name='ステータス',
+		max_length=10,
+		choices=surplus_choice
+	)
+
+	system = models.ForeignKey(
+		System,
+		on_delete=models.CASCADE,
+		verbose_name='システム',
+	)
+
+	opening_date = models.DateField(
+		verbose_name='番号開通日',
+		null=True,
+		blank=True
+	)
+
+	end_date = models.DateField(
+		verbose_name='番号廃止日',
+		null=True,
+		blank=True
+	)
+
+	ticket = models.CharField(
+		verbose_name='チケット番号',
+		max_length=20,
+		null=True,
+		blank=True
+	)
+
+	description = models.TextField(
+		verbose_name='説明',
+		null=True,
+		blank=True
+	)
+
+	updated_date = models.DateTimeField(
+		verbose_name='更新日',
+		auto_now=True
+	)
+
+	updated_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='更新者',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.number
+
+	class Meta:
+		verbose_name = '電話番号（余剰）'
+		verbose_name_plural = '電話番号（余剰）'
+
+
 class AccessLine(models.Model):
 	location = models.ForeignKey(
 		Location,
@@ -467,64 +531,6 @@ class Trank(models.Model):
 	class Meta:
 		verbose_name = 'トランク'
 		verbose_name_plural = 'トランク'
-
-
-class Scenario(models.Model):
-	number = models.CharField(
-		verbose_name='シナリオNo',
-		max_length=50
-	)
-
-	name = models.CharField(
-		verbose_name='シナリオ名',
-		max_length=100
-	)
-
-	service = models.ForeignKey(
-		Service,
-		on_delete=models.CASCADE,
-		verbose_name='サービス名',
-		null=True,
-		blank=True
-	)
-
-	team = models.ForeignKey(
-		Team,
-		on_delete=models.CASCADE,
-		verbose_name='チーム名'
-	)
-
-	description = models.TextField(
-		verbose_name='説明',
-		null=True,
-		blank=True
-	)
-
-	status = models.CharField(
-		verbose_name='ステータス',
-		max_length=10,
-		choices=status_choice
-	)
-
-	updated_user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-		verbose_name='更新者',
-		null=True,
-		blank=True
-	)
-
-	updated_date = models.DateTimeField(
-		verbose_name='更新日',
-		auto_now=True
-	)
-
-	def __str__(self):
-		return f'{self.number} {self.name}'
-
-	class Meta:
-		verbose_name = 'シナリオ'
-		verbose_name_plural = 'シナリオ'
 
 
 class TrankInfo(models.Model):
