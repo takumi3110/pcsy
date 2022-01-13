@@ -47,7 +47,7 @@ class TrankFilter(filters.FilterSet):
 
 class TrankInfoFilter(filters.FilterSet):
 	class Meta:
-		model = Trank
+		model = TrankInfo
 		fields = ['id', 'trank_primary', 'trank_secondary', 'prefix_primary', 'prefix_secondary', 'access_line']
 
 
