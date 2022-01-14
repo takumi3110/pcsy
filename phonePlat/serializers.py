@@ -12,9 +12,9 @@ class SystemSerializer(serializers.ModelSerializer):
 class PhoneNumberSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = PhoneNumber
-		fields = ('id', 'category', 'number', 'status', 'system', 'opening_date', 'end_date', 'start_date',
-		          'obsolete_date', 'interrupt_date', 'paying', 'service', 'ticket', 'description', 'updated_date',
-		          'updated_user')
+		fields = ('id', 'category', 'number', 'status', 'system', 'parent_number', 'dept', 'opening_date', 'end_date',
+		          'start_date', 'obsolete_date', 'interrupt_date', 'paying', 'service', 'ticket', 'description',
+		          'updated_date', 'updated_user')
 
 
 class SurplusNumberSerializer(serializers.ModelSerializer):
