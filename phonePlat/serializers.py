@@ -67,7 +67,7 @@ class IncomingNumberSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = IncomingNumber
 		fields = ('id', 'number', 'paying_service', 'status', 'holder', 'channel_count', 'start_date', 'country',
-		          'target_did', 'description', 'updated_user', 'updated_date')
+		          'target_did', 'service', 'description', 'updated_user', 'updated_date')
 
 
 class PayingCodeSerializer(serializers.ModelSerializer):
