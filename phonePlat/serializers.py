@@ -13,7 +13,7 @@ class PhoneNumberSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = PhoneNumber
 		fields = ('id', 'category', 'number', 'status', 'system', 'opening_date', 'end_date', 'start_date',
-		          'obsolete_date', 'interrupt_date', 'paying', 'ticket', 'description', 'updated_date',
+		          'obsolete_date', 'interrupt_date', 'paying', 'service', 'ticket', 'description', 'updated_date',
 		          'updated_user')
 
 

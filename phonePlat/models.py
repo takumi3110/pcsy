@@ -302,13 +302,15 @@ class PhoneNumber(models.Model):
 	paying = models.CharField(
 		verbose_name='課金先',
 		max_length=10,
-		choices=paying_choice
+		choices=paying_choice,
+		null=True,
+		blank=True
 	)
 
-	scenario = models.ForeignKey(
-		Scenario,
+	service = models.ForeignKey(
+		Service,
 		on_delete=models.CASCADE,
-		verbose_name='シナリオ',
+		verbose_name='サービス',
 		null=True,
 		blank=True
 	)

@@ -52,10 +52,10 @@ class SystemAdmin(admin.ModelAdmin):
 
 @admin.register(PhoneNumber)
 class PhoneNumberAdmin(admin.ModelAdmin):
-	list_display = ('category', 'number', 'status', 'system', 'opening_date', 'updated_date', 'updated_user')
-	list_display_links = ('category', 'number', 'status', 'system', 'opening_date', 'updated_date', 'updated_user')
-	list_filter = ('category', 'number', 'status', 'system', 'updated_user')
-	search_fields = ('category', 'number', 'status', 'system', 'updated_user')
+	list_display = ('category', 'number', 'status', 'system', 'service', 'opening_date', 'updated_date', 'updated_user')
+	list_display_links = ('category', 'number', 'status', 'system', 'service', 'opening_date', 'updated_date', 'updated_user')
+	list_filter = ('category', 'status', 'system', 'updated_user')
+	search_fields = ('category', 'number', 'system', 'service__name')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
 

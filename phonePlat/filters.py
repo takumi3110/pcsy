@@ -30,7 +30,7 @@ class AccessLineFilter(filters.FilterSet):
 class PhoneNumberFilter(filters.FilterSet):
 	class Meta:
 		model = PhoneNumber
-		fields = ['id', 'category', 'number', 'system', 'paying', 'scenario', 'ticket']
+		fields = ['id', 'category', 'number', 'system', 'paying', 'service', 'ticket']
 
 
 class SurplusNumberFilter(filters.FilterSet):
