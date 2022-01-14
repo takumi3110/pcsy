@@ -84,7 +84,7 @@ class TeamAdmin(admin.ModelAdmin):
 	list_filter = ('tenant', 'status')
 	search_fields = ('name', 'code', 'tenant__name')
 	actions_on_bottom = True
-	inlines = [ScenarioInline, ServiceInline, DeptInline]
+	inlines = [DeptInline, ScenarioInline, ServiceInline]
 	readonly_fields = ['updated_date']
 	ordering = ['code']
 
