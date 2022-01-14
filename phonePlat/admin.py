@@ -35,6 +35,13 @@ class ScenarioInline(admin.TabularInline):
 	}
 
 
+class IncomingNumberInline(admin.TabularInline):
+	model = IncomingNumber
+	extra = 0
+	fields = ('number', 'paying_service', 'status', 'holder', 'target_did', 'channel_count', 'start_date')
+	readonly_fields = ('number', 'paying_service', 'holder', 'target_did', 'start_date')
+
+
 @admin.register(System)
 class SystemAdmin(admin.ModelAdmin):
 	list_display = ('name',)
@@ -73,7 +80,7 @@ class ServiceAdmin(admin.ModelAdmin):
 	search_fields = ('number', 'name', 'status', 'team__code', 'updated_user__screenname')
 	actions_on_bottom = True
 	readonly_fields = ['updated_date']
-	inlines = [ScenarioInline]
+	inlines = [ScenarioInline, IncomingNumberInline]
 	formfield_overrides = {
 		models.TextField: {
 			'widget': Textarea(
@@ -148,8 +155,8 @@ class PayingServiceAdmin(admin.ModelAdmin):
 
 @admin.register(IncomingNumber)
 class IncomingNumberAdmin(admin.ModelAdmin):
-	list_display = ('number', 'paying_service', 'status', 'target_did', 'start_date', 'updated_date', 'updated_user')
-	list_display_links = ('number', 'paying_service', 'status', 'target_did', 'start_date', 'updated_date', 'updated_user')
+	list_display = ('number', 'paying_service', 'status', 'target_did', 'service', 'start_date', 'updated_user')
+	list_display_links = ('number', 'paying_service', 'status', 'target_did', 'service', 'start_date', 'updated_user')
 	list_filter = ('paying_service', 'status', 'updated_user')
 	search_fields = ('number', 'target_did', 'paying_service__abbreviation', 'status')
 	actions_on_bottom = True
