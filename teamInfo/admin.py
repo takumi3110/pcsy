@@ -3,7 +3,7 @@ from django.forms import Textarea
 from django.db import models
 
 from .models import *
-from phonePlat.models import Service
+from phonePlat.models import Service, Scenario
 
 
 class ServiceInline(admin.TabularInline):
@@ -12,8 +12,25 @@ class ServiceInline(admin.TabularInline):
 	ordering = ['number']
 	fields = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
 	          'remind', 'description')
-	readonly_fields = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'start_date', 'end_date',
-	                   'remind')
+	readonly_fields = ('category', 'number', 'name')
+	formfield_overrides = {
+		models.TextField: {
+			'widget': Textarea(
+				attrs={
+					'rows': 1,
+					'cols': 20
+				}
+			)
+		}
+	}
+
+
+class ScenarioInline(admin.TabularInline):
+	model = Scenario
+	extra = 0
+	ordering = ['number']
+	fields = ('number', 'name', 'status', 'service', 'description', 'updated_date')
+	readonly_fields = ('number', 'name', 'service', 'updated_date')
 	formfield_overrides = {
 		models.TextField: {
 			'widget': Textarea(
@@ -67,7 +84,7 @@ class TeamAdmin(admin.ModelAdmin):
 	list_filter = ('tenant', 'status')
 	search_fields = ('name', 'code', 'tenant__name')
 	actions_on_bottom = True
-	inlines = [ServiceInline, DeptInline]
+	inlines = [ScenarioInline, ServiceInline, DeptInline]
 	readonly_fields = ['updated_date']
 	ordering = ['code']
 
