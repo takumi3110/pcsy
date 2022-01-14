@@ -234,16 +234,25 @@ class Scenario(models.Model):
 
 class PhoneNumber(models.Model):
 	category_choice = (
-		('csim', 'CSIM'),
-		('others', '他システム'),
-		('fax', '実回線、FAX'),
-		('outgoing', '発信専用番号'),
-		('surplus', '余剰')
+		('CSIM', 'CSIM'),
+		('他システム', '他システム'),
+		('実回線、FAX', '実回線、FAX'),
+		('発信専用番号', '発信専用番号'),
+		('余剰', '余剰')
 	)
 
 	paying_choice = (
 		('自課金', '自課金'),
 		('その他', 'その他')
+	)
+
+	surplus_choice = (
+		('ダミー', 'ダミー'),
+		('余剰', '余剰'),
+		('予約中', '予約中'),
+		('使用中', '使用中'),
+		('廃止予定', '廃止予定'),
+		('廃止済', '廃止済'),
 	)
 
 	category = models.CharField(
@@ -260,13 +269,28 @@ class PhoneNumber(models.Model):
 	status = models.CharField(
 		verbose_name='ステータス',
 		max_length=10,
-		choices=status_choice
+		choices=surplus_choice
 	)
 
 	system = models.ForeignKey(
 		System,
 		on_delete=models.CASCADE,
 		verbose_name='システム'
+	)
+
+	parent_number = models.ForeignKey(
+		ParentNumber,
+		on_delete=models.CASCADE,
+		verbose_name='親番号',
+		null=True,
+		blank=True
+	)
+
+	dept = models.ForeignKey(
+		Dept,
+		on_delete=models.CASCADE,
+		verbose_name='部門',
+		blank=True
 	)
 
 	opening_date = models.DateField(
