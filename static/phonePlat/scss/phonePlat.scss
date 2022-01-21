@@ -4,8 +4,8 @@ $cGreen: green;
 
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
-.body {
-  background-color: $cWhite;
+.page-wrapper {
+  position: relative;
 }
 
 .main-title {
@@ -42,7 +42,12 @@ $cGreen: green;
 }
 
 .st-footer {
+  color: $cWhite;
   background-color: $cGreen;
   width: 100%;
+  height: 10%;
   margin-top: 60px;
+  position: absolute;
+  bottom: 0;
+
 }

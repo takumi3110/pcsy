@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
-.body {
-  background-color: white;
+.page-wrapper {
+  position: relative;
 }
 
 .main-title {
@@ -32,9 +32,13 @@
 }
 
 .st-footer {
+  color: white;
   background-color: green;
   width: 100%;
+  height: 10%;
   margin-top: 60px;
+  position: absolute;
+  bottom: 0;
 }
 
 /*# sourceMappingURL=phonePlat.css.map */
