@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
-</body>
-</html>
+{% block content %}
+
+	<div class="container mt-5">
+		<div class="row">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>カテゴリー</th>
+						<th>サービス名</th>
+						<th>チーム名</th>
+						<th>サービス開始日</th>
+						<th>ステータス</th>
+						<th>祝日設定</th>
+						<th>24時間/365対応</th>
+						<th>リマインド</th>
+						<th>更新日</th>
+						<th>更新者</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for sevice in sevice_list %}
+						<tr>
+							<td>{{ service.category }}</td>
+							<td>{{ service.name }}</td>
+							<td>{{ service.team }}{{ service.team.code }} {{ service.team.name }}</td>
+							<td>{{ service.start_date }}</td>
+							<td>{{ service.status }}</td>
+							<td>{{ service.holiday }}</td>
+							<td>{{ service.always }}</td>
+							<td>{{ service.remind }}</td>
+							<td>{{ service.updated_date }}</td>
+							<td>{{ service.updated_user }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock content%}

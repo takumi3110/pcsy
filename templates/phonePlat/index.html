@@ -2,9 +2,39 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-	<div class="container">
+	
+	<div class="container mt-5">
 		<div class="row">
-
+			{% for key, value in link_list.items %}
+				<div class="col-3 index-menu">
+					<div class="card menu-card" id="index-{{ key }}">
+						<div class="card-body">
+							<span class="card-value">
+								{{ value }}
+							</span>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
+	
 {% endblock content %}
+
+{% block javascript %}
+	<script type="text/javascript">
+        {% for key, value in link_list.items %}
+	        let get_{{ key }} = document.getElementById("index-{{ key }}");
+	        get_{{ key }}.onclick = function() {
+		        if ('{{ key }}' === 'service') {
+                    location.href = '{% url 'phonePlat:service_list' %}';
+		        } else {
+	                location.href = '#';
+		        }
+	        }
+        {% endfor %}
+
+
+	</script>
+
+{% endblock %}
