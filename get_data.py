@@ -606,8 +606,8 @@ def get_phone_number(url):
 	:param url:
 	"""
 	file_list = [
-		r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（asterisk）_一覧表示画面_2022_01_13 14_39_10.Csv',
-		r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（bcp）_一覧表示画面_2022_01_13 14_42_20.Csv',
+		# r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（asterisk）_一覧表示画面_2022_01_13 14_39_10.Csv',
+		# r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（bcp）_一覧表示画面_2022_01_13 14_42_20.Csv',
 		r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（csim）_一覧表示画面_2022_01_13 14_38_26.Csv',
 		r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（fax）_一覧表示画面_2022_01_13 14_41_02.Csv',
 		r'D:\PycharmProjects\pcsy\temp\06_電話番号一覧（inin）_一覧表示画面_2022_01_13 14_42_56.Csv',
@@ -647,7 +647,7 @@ def get_phone_number(url):
 			read = csv.reader(f)
 			for r in read:
 				phone_id = int(r[1])
-				if phone_id >= 0:
+				if phone_id >= 5425:
 					category = r[0].split('（')[1]
 					number = r[2]
 					status = r[3]
@@ -661,34 +661,40 @@ def get_phone_number(url):
 					team_id = get_result['team_id']
 					service_id = get_result['service_id']
 					translate_category = category.replace('）', '')
-					dept_translate = {
-						'(': '',
-						')': ''
-					}
-					translate_dept_name = trans_word(dept_name, **dept_translate)
-					dept_params = {
-						'code': dept_code,
-						'name': translate_dept_name,
-						'team': team_id,
-						'active': True
-					}
-					get_dept_id = {
-						'url': dept_url,
-						'word': '',
-						'add_params': '',
-						'params': dept_params
-					}
-					dept_id = get_id(**get_dept_id)
-					parent_number_params = {
-						'number': parent_number
-					}
-					get_parent_number_id = {
-						'url': parent_number_url,
-						'word': '',
-						'add_params': '',
-						'params': parent_number_params
-					}
-					parent_number_id = get_id(**get_parent_number_id)
+					if dept_code != '' and dept_name != '':
+						dept_translate = {
+							'(': '',
+							')': ''
+						}
+						translate_dept_name = trans_word(dept_name, **dept_translate)
+						dept_params = {
+							'code': dept_code,
+							'name': translate_dept_name,
+							'team': team_id,
+							'active': True
+						}
+						get_dept_id = {
+							'url': dept_url,
+							'word': '',
+							'add_params': '',
+							'params': dept_params
+						}
+						dept_id = get_id(**get_dept_id)
+					else:
+						dept_id = ''
+					if parent_number != '':
+						parent_number_params = {
+							'number': parent_number
+						}
+						get_parent_number_id = {
+							'url': parent_number_url,
+							'word': '',
+							'add_params': '',
+							'params': parent_number_params
+						}
+						parent_number_id = get_id(**get_parent_number_id)
+					else:
+						parent_number_id = ''
 					phone_number_params = {
 						'category': translate_category,
 						'number': number,
