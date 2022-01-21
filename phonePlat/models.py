@@ -290,6 +290,7 @@ class PhoneNumber(models.Model):
 		Dept,
 		on_delete=models.CASCADE,
 		verbose_name='部門',
+		null=True,
 		blank=True
 	)
 
