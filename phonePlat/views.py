@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 
 from rest_framework import viewsets
@@ -82,11 +83,53 @@ class NotificationViewSet(viewsets.ModelViewSet):
     filter_class = NotificationFilter
 
 
+@login_required()
 def index(request):
-    return render(request, 'phonePlat/index.html')
+    link_list = {
+        'site': 'サイト',
+        'tenant': 'テナント',
+        'team': 'チーム',
+        'service': 'サービス',
+        'scenario': 'シナリオ',
+        'phone': '電話番号',
+        'incoming': '着信課金番号',
+        'paying': '課金番号',
+        'access': 'アクセス回線',
+    }
+    return render(request, 'phonePlat/index.html', {'link_list': link_list})
 
 
 class ServiceListView(LoginRequiredMixin, ListView):
     model = Service
-    template_name = 'phonePlat/index.html'
-    paginate_by = 20
+    template_name = 'phonePlat/service_list.html'
+    paginate_by = 30
+
+
+class ScenarioListView(LoginRequiredMixin, ListView):
+    model = Scenario
+    template_name = 'phonePlat/scenario_list.html'
+    paginated_by = 30
+
+
+class PhonNumberListView(LoginRequiredMixin, ListView):
+    model = PhoneNumber
+    template_name = 'phonePlat/phone_number_list.html'
+    paginate_by = 30
+
+
+class IncomingNumberListView(LoginRequiredMixin, ListView):
+    model = IncomingNumber
+    template_name = 'phonePlat/incoming_number_list.html'
+    paginate_by = 30
+
+
+class PayingCodeListView(LoginRequiredMixin, ListView):
+    model = PayingCode
+    template_name = 'phonePlat/paying_code_list.html'
+    paginate_by = 30
+
+
+class AccessLineListView(LoginRequiredMixin, ListView):
+    model = AccessLine
+    template_name = 'phonePlat/access_line_list.html'
+    paginate_by = 30
