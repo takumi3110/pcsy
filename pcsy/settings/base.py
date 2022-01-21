@@ -1,15 +1,13 @@
-from pathlib import Path
-from .local_settings import *
+from django.core.management.utils import get_random_secret_key
 
+from pathlib import Path
 import os
+
+from .local_settings import *
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = key
-
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = get_random_secret_key()
 
 INSTALLED_APPS = [
 	'django.contrib.admin',
@@ -64,29 +62,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pcsy.wsgi.application'
 
-"""
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': BASE_DIR / 'db.sqlite3',
-	}
-}
-"""
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'pcsy',
-		'USER': LOCAL_DB_USER,
-		'PASSWORD': LOCAL_DB_PASS,
-		'HOST': '127.0.0.1',
-		'PORT': LOCAL_DB_PORT,
-		'OPTIONS': {
-			'charset': 'utf8mb4',
-		}
-	}
-}
-
-
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -114,7 +89,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
