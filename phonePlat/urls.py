@@ -20,4 +20,6 @@ router.register(r'incomingNumber', views.IncomingNumberViewSet)
 router.register(r'payingCode', views.PayingCodeViewSet)
 router.register(r'notification', views.NotificationViewSet)
 
-urlpatterns = []
+urlpatterns = [
+	path('', views.index, name='index')
+]

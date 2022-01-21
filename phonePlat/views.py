@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 
 from rest_framework import viewsets
 
@@ -78,3 +80,13 @@ class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     filter_class = NotificationFilter
+
+
+def index(request):
+    return render(request, 'phonePlat/index.html')
+
+
+class ServiceListView(LoginRequiredMixin, ListView):
+    model = Service
+    template_name = 'phonePlat/index.html'
+    paginate_by = 20
