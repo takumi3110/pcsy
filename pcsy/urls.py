@@ -10,5 +10,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/phonePlat/', include(phoneplat_router.urls)),
     path('api/v1/teamInfo/', include(teaminfo_router.urls)),
-    path('api/v1/line/', include(line_router.urls))
+    path('api/v1/line/', include(line_router.urls)),
+    path('', include('phonePlat.urls'))
 ]
