@@ -21,5 +21,6 @@ router.register(r'payingCode', views.PayingCodeViewSet)
 router.register(r'notification', views.NotificationViewSet)
 
 urlpatterns = [
-	path('', views.index, name='index')
+	path('', views.index, name='index'),
+	path('service_list/', views.ServiceListView.as_view(), name='service_list')
 ]
