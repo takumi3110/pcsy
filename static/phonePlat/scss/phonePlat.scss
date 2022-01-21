@@ -1,10 +1,48 @@
 $cWhite: white;
+$cBlack: black;
+$cGreen: green;
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 .body {
   background-color: $cWhite;
 }
 
-.menu-icon {
-  width: 100px;
-  height: 100px;
+.main-title {
+  font-family: 'Permanent Marker', cusive;
+  font-size: 40px;
+  color: $cGreen;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.index-menu {
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  & .menu-card {
+    height: 100px;
+    text-align: center;
+    border-radius: 10px;
+
+    & .card-value {
+      font-size: 20px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 5px 5px 20px darkgreen;
+    }
+  }
+}
+
+.st-footer {
+  background-color: $cGreen;
+  width: 100%;
+  margin-top: 60px;
 }
