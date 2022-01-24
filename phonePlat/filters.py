@@ -3,6 +3,10 @@ from django_filters import rest_framework as filters
 from .models import *
 
 
+class MyOrderingFilter(filters.OrderingFilter):
+	descending_fmt = '%s (降順)'
+
+
 class SystemFilter(filters.FilterSet):
 	class Meta:
 		model = System
