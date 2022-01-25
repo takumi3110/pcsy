@@ -20,6 +20,8 @@ INSTALLED_APPS = [
 	'django_filters',
 	'rest_framework',
 	'corsheaders',
+	'crispy_forms',
+	'crispy_bootstrap5',
 	'user',
 	'ldap',
 	'phonePlat',
