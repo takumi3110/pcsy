@@ -139,7 +139,7 @@ class ServiceDetailView(LoginRequiredMixin, DetailView):
 class ServiceUpdateView(LoginRequiredMixin, UpdateView):
 	model = Service
 	template_name = 'phonePlat/service_update.html'
-	form_class = ServiceForms
+	form_class = CrispyServiceUpdateForm
 
 
 class ScenarioListView(LoginRequiredMixin, ListView):
