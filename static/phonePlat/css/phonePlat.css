@@ -31,6 +31,10 @@
   box-shadow: 5px 5px 20px darkgreen;
 }
 
+.list-table {
+  cursor: pointer;
+}
+
 .st-footer {
   color: white;
   background-color: green;
