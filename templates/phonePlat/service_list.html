@@ -1,14 +1,49 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
+
 {% block content %}
 
 	<div class="container mt-5">
 		<div class="row">
-			<table class="table table-bordered table-hover">
-				<thead>
+			<div class="col-6">
+				<form action="#" method="get">
+				{% csrf_token %}
+					<label class="visually-hidden" for="searchService"></label>
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" id="searchService" placeholder="search"
+					       name="q" value="{{ request.GET.q }}">
+						<div class="input-group-test">
+							<button class="btn btn-outline-secondary">search</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-3 mb-3">
+				<label for="categorySelect">カテゴリー：</label>
+				<select name="category" id="categorySelect" title="category" class="custom-select category-select">
+					<option value="all">すべて</option>
+					<option value="csim">CSIM</option>
+					<option value="others">その他</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			{% if request.GET.q is not None %}
+				<div class="search-result mb-3">
+					検索結果:全{{ paginator.count }}件
+					<span class="search-word">
+						"{{ request.GET.q }}"
+					</span>
+				</div>
+			{% endif %}
+			<table class="table table-sm table-bordered table-hover">
+				<thead class="table-light">
 					<tr>
 						<th>カテゴリー</th>
+						<th>サービスNo.</th>
 						<th>サービス名</th>
 						<th>チーム名</th>
 						<th>サービス開始日</th>
@@ -21,23 +56,82 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for sevice in sevice_list %}
-						<tr>
-							<td>{{ service.category }}</td>
+					{% for service in service_list %}
+						<tr id="serviceTable{{ service.pk }}" class="list-table">
+							<td id="serviceCategory{{ service.pk }}">
+								{{ service.category }}
+							</td>
+							<td>
+								{% if service.number is not None %}
+									{{ service.number }}
+								{% endif %}
+							</td>
 							<td>{{ service.name }}</td>
-							<td>{{ service.team }}{{ service.team.code }} {{ service.team.name }}</td>
-							<td>{{ service.start_date }}</td>
+							<td>{{ service.team }}</td>
+							<td>
+								{% if service.start_date is not None %}
+									{{ service.start_date }}
+								{% endif %}
+							</td>
 							<td>{{ service.status }}</td>
-							<td>{{ service.holiday }}</td>
-							<td>{{ service.always }}</td>
+							<td>
+								<label for="holiday{{ service.pk }}"></label>
+								<input type="checkbox" class="form-check-input" id="holiday{{ service.pk }}"
+								                                                    value="" disabled {% if service.holiday %}checked{% endif %}>
+							</td>
+							<td>
+								<label for="always{{ service.pk }}"></label>
+								<input type="checkbox" class="form-check-input" id="always{{ service.pk }}"
+								       value="" disabled {% if service.always %}checked{% endif %}>
+							</td>
 							<td>{{ service.remind }}</td>
 							<td>{{ service.updated_date }}</td>
-							<td>{{ service.updated_user }}</td>
+							<td>
+								{% if service.updated_user is not None %}
+									{{ service.updated_user }}
+								{% endif %}
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
+		<div class="row">
+			{% include 'pagination.html' %}
+		</div>
 	</div>
 
 {% endblock content%}
+
+{% block javascript %}
+	<script type="text/javascript">
+		let get_category_select = document.getElementById('categorySelect')
+		let select_category_val = get_category_select.value;
+        {% for service in service_list %}
+	        let get_service_table_{{ service.pk }} = document.getElementById('serviceTable{{ service.pk }}');
+            get_service_table_{{ service.pk }}.onclick = function() {
+                location.href = '{% url "phonePlat:service_detail" service.pk %}';
+            }
+        {% endfor %}
+
+        const selectCategory = document.querySelector('.category-select')
+		selectCategory.addEventListener('change', (event) => {
+            let category_value = event.target.value;
+            {% for service in service_list %}
+	            let get_service_table_{{ service.pk }} = document.getElementById('serviceTable{{ service.pk }}');
+                let get_service_category_{{ service.pk }} = document.getElementById('serviceCategory{{ service.pk }}');
+	            if (category_value === get_service_category_{{ service.pk }}.innerText ) {
+                    get_service_table_{{ service.pk }}.style.display = 'block';
+                } else if (category_value === 'all') {
+                    get_service_table_{{ service.pk }}.style.display = 'block';
+                } else {
+                    get_service_table_{{ service.pk }}.style.display = 'none';
+                }
+            {% endfor %}
+		});
+
+
+
+	</script>
+
+{% endblock %}
