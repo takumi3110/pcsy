@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="row mb-3">
+			<h3 class="service-name">{{ service.number }} {{ service.name }}</h3>
+			<p>作成日時：</p>
+			<p>更新日時：
+				{% if updated_date is not None %}
+					{{ updated_date }}
+				{% endif %}
+			</p>
+			<p>
+				{% if updated_user is not None %}
+					{{ updated_user }}
+				{% endif %}
+			</p>
+		</div>
+		<div class="row">
+			<form action="#" method="post">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="col-6 mb-3">
+					{{ field.label }}
+					{% if field.initial is not None %}
+						{{ field.initial }}
+					{% endif %}
+				</div>
+			{% endfor %}
+			</form>
+
+		</div>
+	</div>
+
+{% endblock content %}
