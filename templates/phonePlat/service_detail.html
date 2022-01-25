@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="row mb-3">
+			<h3 class="service-name">{{ service.number }} {{ service.name }}</h3>
+			<p>作成日時：</p>
+			<p>更新日時：
+				{% if updated_date is not None %}
+					{{ updated_date }}
+				{% endif %}
+			</p>
+			<p>
+				{% if updated_user is not None %}
+					{{ updated_user }}
+				{% endif %}
+			</p>
+		</div>
+		<div class="row mb-3">
+			<label for="inputNumber" class="col-1 col-form-label">サービスNo.</label>
+			<div class="col-3">
+				<input type="text" class="form-control" id="inputNumber" placeholder="{{ service.number }}" disabled>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-1">サービス名</div>
+			<div class="col-6">{{ service.name }}</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-1">ステータス</div>
+			<div class="col-3">{{ service.status }}</div>
+			<div class="col-1">チーム名</div>
+			<div class="col-3">{{ service.team }}</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-1">サービス開始日</div>
+			<div class="col-3">{{ service.start_date }}</div>
+			<div class="col-1">サービス終了日</div>
+			<div class="col-3">{{ service.end_date }}</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-1">リマインド</div>
+			<div class="col-3">{{ service.remind }}</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-1">
+				<label for="holiday{{ service.pk }}">祝日設定</label>
+			</div>
+			<div class="col-3">
+				<input type="checkbox" class="form-check-input" id="holiday{{ service.pk }}" value="holiday"
+				disabled {% if service.holiday %}checked{% endif %}>
+			</div>
+
+			<div class="col-1">CH数</div>
+			<div class="col-3">{{ service.channel_count }}</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-1">内容</div>
+			<div class="col-10">
+				{% if service.description is not None %}
+					{{ service.description }}
+				{% endif %}
+			</div>
+		</div>
+	<button class="btn btn-xl btn-info" onclick="location.href='{% url "phonePlat:service_update" service.pk %}'">
+		編集
+	</button>
+	</div>
+
+{% endblock content %}
