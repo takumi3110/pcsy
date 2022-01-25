@@ -21,12 +21,20 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-3 mb-3">
+			<div class="form-group col-2 mb-3">
 				<label for="categorySelect">カテゴリー：</label>
 				<select name="category" id="categorySelect" title="category" class="custom-select category-select">
 					<option value="all">すべて</option>
 					<option value="csim">CSIM</option>
 					<option value="others">その他</option>
+				</select>
+			</div>
+			<div class="form-group col-2 mb-3">
+				<label for="categorySelect">リマインド：</label>
+				<select name="remind" id="remindSelect" title="remind" class="custom-select remind-select">
+					<option value="all">すべて</option>
+					<option value="start">開始</option>
+					<option value="end">終了</option>
 				</select>
 			</div>
 		</div>
@@ -84,7 +92,11 @@
 								<input type="checkbox" class="form-check-input" id="always{{ service.pk }}"
 								       value="" disabled {% if service.always %}checked{% endif %}>
 							</td>
-							<td>{{ service.remind }}</td>
+							<td>
+								{% if service.remind is not None %}
+									{{ service.remind }}
+								{% endif %}
+							</td>
 							<td>{{ service.updated_date }}</td>
 							<td>
 								{% if service.updated_user is not None %}
