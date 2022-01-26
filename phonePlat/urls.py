@@ -30,5 +30,8 @@ urlpatterns = [
 	path('scenario_update/<int:pk>', views.ScenarioUpdateView.as_view(), name='scenario_update'),
 	path('phone_number_list/', views.PhoneNumberListView.as_view(), name='phone_number_list'),
 	path('phone_number_detail/<int:pk>', views.PhoneNumberDetailView.as_view(), name='phone_number_detail'),
-	path('phone_number_update/<int:pk>', views.PhoneNumberUpdateView.as_view(), name='phone_number_update')
+	path('phone_number_update/<int:pk>', views.PhoneNumberUpdateView.as_view(), name='phone_number_update'),
+	path('access_line_list/', views.AccessLineListView.as_view(), name='access_line_list'),
+	path('access_line_detail/<int:pk>', views.AccessLineDetailView.as_view(), name='access_line_detail'),
+	path('access_line_update/<int:pk>', views.AccessLineUpdateView.as_view(), name='access_line_update')
 ]

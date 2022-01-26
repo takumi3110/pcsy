@@ -229,3 +229,27 @@ class AccessLineListView(LoginRequiredMixin, ListView):
 	model = AccessLine
 	template_name = 'phonePlat/access_line_list.html'
 	paginate_by = 30
+
+	def get_queryset(self):
+		query = self.request.GET.get('q', None)
+		lookups = (
+			Q(location__name__icontains=query) |
+			Q(parent_number__number__icontains=query) |
+			Q(contract_number__number__icontains=query)
+		)
+		if query is not None:
+			queryset = super().get_queryset().filter(lookups).distinct().order_by('location')
+		else:
+			queryset = super().get_queryset().order_by('location')
+		return queryset
+
+
+class AccessLineDetailView(LoginRequiredMixin, DetailView):
+	model = AccessLine
+	template_name = 'phonePlat/access_line_detail.html'
+
+
+class AccessLineUpdateView(LoginRequiredMixin, UpdateView):
+	model = AccessLine
+	template_name = 'phonePlat/access_line_update.html'
+	form_class = CrispyAccessLineUpdateForm

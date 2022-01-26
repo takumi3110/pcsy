@@ -141,3 +141,22 @@ class CrispyPhoneNumberUpdateForm(PhoneNumberUpdateForm):
 			),
 			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
 		)
+
+
+class AccessLineUpdateForm(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		for field in self.fields.values():
+			field.widget.attrs['class'] = 'form-control'
+
+	class Meta:
+		model = AccessLine
+		fields = ('location', 'system', 'status', 'parent_number', 'opening_date', 'contract_number', 'proportion',
+		          'surplus_count', 'allowance_count', 'threshold_value')
+
+
+class CrispyAccessLineUpdateForm(AccessLineUpdateForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.layout = Layout()
