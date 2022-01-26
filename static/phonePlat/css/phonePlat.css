@@ -11,7 +11,7 @@
 .main-title .char {
   display: inline-block;
   animation-name: kf-animate-chars;
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: 1;
@@ -19,16 +19,16 @@
   animation-fill-mode: both;
 }
 .main-title .char:nth-child(1) {
-  animation-delay: 0.4s;
+  animation-delay: 0.2s;
 }
 .main-title .char:nth-child(2) {
-  animation-delay: 0.8s;
+  animation-delay: 0.4s;
 }
 .main-title .char:nth-child(3) {
-  animation-delay: 1.2s;
+  animation-delay: 0.6s;
 }
 .main-title .char:nth-child(4) {
-  animation-delay: 1.6s;
+  animation-delay: 0.8s;
 }
 .main-title:hover {
   cursor: pointer;

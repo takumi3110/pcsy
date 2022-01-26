@@ -18,14 +18,14 @@ $cGreen: green;
     display: inline-block;
     @include animation(
       $name: kf-animate-chars,
-      $duration: 0.3s,
+      $duration: 0.2s,
       // $iteration-count: infinite,
       $timing-function: ease-in-out,
       $fill-mode: both,
     );
     @for $i from 1 through 4 {
       &:nth-child(#{$i}) {
-        animation-delay: $i * 0.4s;
+        animation-delay: $i * 0.2s;
       }
     }
   }
