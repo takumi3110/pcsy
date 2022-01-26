@@ -1,0 +1,33 @@
+<div class="row mb-5">
+	<a href="{% url 'phonePlat:index' %}">
+		<i class="fas fa-undo-alt"></i>戻る
+	</a>
+</div>
+<div class="row">
+	<div class="col-6">
+		<form action="#" method="get">
+		{% csrf_token %}
+			<label class="visually-hidden" for="searchService"></label>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="searchService" placeholder="search"
+			       name="q" value="{{ request.GET.q }}">
+				<div class="input-group-test">
+					<button class="btn btn-outline-secondary">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="row">
+	{% if request.GET.q is not None %}
+		<div class="search-result mb-3">
+			検索結果:全{{ paginator.count }}件
+			<span class="search-word">
+				"{{ request.GET.q }}"
+			</span>
+			<a href="{% url 'phonePlat:service_list' %}">検索を解除</a>
+		</div>
+	{% endif %}
+</div>
