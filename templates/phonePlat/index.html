@@ -27,7 +27,9 @@
 	        let get_{{ key }} = document.getElementById("index-{{ key }}");
 	        get_{{ key }}.onclick = function() {
 		        if ('{{ key }}' === 'service') {
-                    location.href = '{% url 'phonePlat:service_list' %}';
+                    location.href = '{% url "phonePlat:service_list" %}';
+                } else if ('{{ key }}' === 'scenario') {
+                    location.href = '{% url "phonePlat:scenario_list" %}';
 		        } else {
 	                location.href = '#';
 		        }
