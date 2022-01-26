@@ -18,7 +18,9 @@
 						<input type="text" class="form-control" id="searchService" placeholder="search"
 					       name="q" value="{{ request.GET.q }}">
 						<div class="input-group-test">
-							<button class="btn btn-outline-secondary">search</button>
+							<button class="btn btn-outline-secondary">
+								<i class="fas fa-search"></i>
+							</button>
 						</div>
 					</div>
 				</form>
@@ -44,7 +46,7 @@
 		</div>
 		<div class="row">
 			{% if request.GET.q is not None %}
-				<div class="search-result mb-3">
+				<div class="search-result">
 					検索結果:全{{ paginator.count }}件
 					<span class="search-word">
 						"{{ request.GET.q }}"
@@ -52,7 +54,9 @@
 					<a href="{% url 'phonePlat:service_list' %}">検索を解除</a>
 				</div>
 			{% endif %}
-			<table class="table table-sm table-bordered table-hover">
+		</div>
+		<div class="row">
+			<table class="table table-sm table-bordered table-hover mt-3">
 				<thead class="table-light">
 					<tr>
 						<th>カテゴリー</th>
