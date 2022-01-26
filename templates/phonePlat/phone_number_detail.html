@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+	<div class="container mt-5">
+		<div class="row mb-5">
+			<a href="{% url 'phonePlat:phone_number_list' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+		<div class="row">
+			<div class="col-9 offset-1">
+				<div class="row">
+					<h3 class="phone-name mb-3">{{ phonenumber.number }} ({{ phonenumber.service }})</h3>
+					<p>作成日時：</p>
+					<p>更新日時：{{ phonenumber.updated_date }}
+						{% if phonenumber.updated_user is not None %}
+							{{ phonenumber.updated_user }}
+						{% endif %}
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:phone_number_update" phonenumber.pk %}'">
+							編集
+						</button>
+					</p>
+
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<div class="row mb-5">
+							<div class="col-2">カテゴリー</div>
+							<div class="col-4">{{ phonenumber.category }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">電話番号</div>
+							<div class="col-4">{{ phonenumber.number }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">ステータス</div>
+							<div class="col-4">{{ phonenumber.status }}</div>
+							<div class="col-2">システム</div>
+							<div class="col-2">{{ phonenumber.system }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">親番号</div>
+							<div class="col-4">
+								{% if phonenumber.parent_number is not None %}
+									{{ phonenumber.parent_number }}
+								{% endif %}
+							</div>
+							<div class="col-2">部門</div>
+							<div class="col-4">
+								{% if phonenumber.dept is not None %}
+									{{ phonenumber.dept }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">番号開通日</div>
+							<div class="col-4">
+								{% if phonenumber.opening_date is not None %}
+									{{ phonenumber.opening_date }}
+								{% endif %}
+							</div>
+							<div class="col-2">番号廃止日</div>
+							<div class="col-2">
+								{% if phonenumber.end_date is not None %}
+									{{ phonenumber.end_date }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">利用開始日</div>
+							<div class="col-4">
+								{% if phonenumber.start_date is not None %}
+									{{ phonenumber.start_date }}
+								{% endif %}
+							</div>
+							<div class="col-2">利用終了日</div>
+							<div class="col-2">
+								{% if phonenumber.obsolete_date is not None %}
+									{{ phonenumber.obsolete_date }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">割り込み申込日</div>
+							<div class="col-4">
+								{% if phonenumber.interrupt_date is not None %}
+									{{ phonenumber.interrupt_date }}
+								{% endif %}
+							</div>
+							<div class="col-2">課金先</div>
+							<div class="col-4">
+								{% if phonenumber.paying is not None %}
+									{{ phonenumber.paying }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">サービス</div>
+							<div class="col-4">
+								{% if phonenumber.service is not None %}
+									{{ phonenumber.service }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">チケット番号</div>
+							<div class="col-4">
+								{% if phonenumber.ticket is not None %}
+									{{ phonenumber.ticket }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-2">説明</div>
+							<div class="col-10">
+								{% if phonenumber.description is not None and phonenumber.description != '' %}
+									{{ phonenumber.description }}
+								{% else %}
+									<label for="non-text" style="display: none;"></label>
+									<input type="text" class="form-control" id="non-text" disabled>
+								{% endif %}
+							</div>
+						</div>
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:phone_number_update" phonenumber.pk %}'">
+							編集
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
