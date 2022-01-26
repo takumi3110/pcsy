@@ -24,5 +24,8 @@ urlpatterns = [
 	path('', views.index, name='index'),
 	path('service_list/', views.ServiceListView.as_view(), name='service_list'),
 	path('service_detail/<int:pk>', views.ServiceDetailView.as_view(), name='service_detail'),
-	path('service_update/<int:pk>', views.ServiceUpdateView.as_view(), name='service_update')
+	path('service_update/<int:pk>', views.ServiceUpdateView.as_view(), name='service_update'),
+	path('scenario_list/', views.ScenarioListView.as_view(), name='scenario_list'),
+	path('scenario_detail/<int:pk>', views.ScenarioDetailView.as_view(), name='scenario_detail'),
+	path('scenario_update/<int:pk>', views.ScenarioUpdateView.as_view(), name='scenario_update')
 ]

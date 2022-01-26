@@ -145,7 +145,41 @@ class ServiceUpdateView(LoginRequiredMixin, UpdateView):
 class ScenarioListView(LoginRequiredMixin, ListView):
 	model = Scenario
 	template_name = 'phonePlat/scenario_list.html'
-	paginated_by = 30
+	paginate_by = 30
+
+	def get_queryset(self):
+		"""
+		get_query = self.request.GET.get('q', None).split(' ')
+		for query in get_query:
+			lookups = (
+				Q(number__icontains=query) |
+				Q(name__icontains=query) |
+				Q(team__name__icontains=query)
+			)
+		"""
+		query = self.request.GET.get('q', None)
+		lookups = (
+				Q(number__icontains=query) |
+				Q(name__icontains=query) |
+				Q(team__name__icontains=query) |
+				Q(service__name__icontains=query)
+		)
+		if query is not None:
+			queryset = super().get_queryset().filter(lookups).distinct().order_by('number')
+		else:
+			queryset = super().get_queryset().order_by('number')
+		return queryset
+
+
+class ScenarioDetailView(LoginRequiredMixin, DetailView):
+	model = Scenario
+	template_name = 'phonePlat/scenario_detail.html'
+
+
+class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
+	model = Scenario
+	template_name = 'phonePlat/scenario_update.html'
+	form_class = CrispyScenarioUpdateForm
 
 
 class PhonNumberListView(LoginRequiredMixin, ListView):
