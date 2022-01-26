@@ -72,10 +72,10 @@
 						<div class="row mb-3">
 							<div class="col-2">内容</div>
 							<div class="col-10">
-								{% if service.description is not None %}
+								{% if service.description is not None and service.description != '' %}
 									{{ service.description }}
 								{% else %}
-									<label for="non-text"></label>
+									<label for="non-text" style="display: none;"></label>
 									<input type="text" class="form-control" id="non-text" disabled>
 								{% endif %}
 							</div>
