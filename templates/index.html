@@ -30,6 +30,8 @@
                     location.href = '{% url "phonePlat:service_list" %}';
                 } else if ('{{ key }}' === 'scenario') {
                     location.href = '{% url "phonePlat:scenario_list" %}';
+                } else if ('{{ key }}' === 'phone') {
+                    location.href= '{% url "phonePlat:phone_number_list" %}';
 		        } else {
 	                location.href = '#';
 		        }
