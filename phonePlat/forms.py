@@ -5,6 +5,11 @@ from crispy_forms.layout import Row, Column, Submit
 from .models import *
 
 
+def css_class(column, bottom):
+	col = 'col-' + str(column)
+	margin_bottom = 'mb-' + str(bottom)
+	return 'form-group ' + col + ' ' + margin_bottom
+
 class ServiceUpdateForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -77,6 +82,62 @@ class CrispyScenarioUpdateForm(ScenarioUpdateForm):
 			),
 			Row(
 				Column('description', css_class='form-group col-12 mb-3')
+			),
+			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
+		)
+
+
+class PhoneNumberUpdateForm(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		for field in self.fields.values():
+			field.widget.attrs['class'] = 'form-control'
+
+	class Meta:
+		model = PhoneNumber
+		fields = ('number', 'status', 'system', 'parent_number', 'dept', 'opening_date', 'end_date', 'start_date',
+		          'obsolete_date', 'interrupt_date', 'paying', 'service', 'ticket', 'description')
+
+
+class CrispyPhoneNumberUpdateForm(PhoneNumberUpdateForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.layout = Layout(
+			Row(
+				Column('category', css_class=css_class(6, 3)),
+			),
+			Row(
+				Column('number', css_class=css_class(6, 3)),
+			),
+			Row(
+				Column('status', css_class=css_class(6, 3)),
+				Column('system', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('parent_number', css_class=css_class(6, 3)),
+				Column('dept', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('opening_date', css_class=css_class(6, 3)),
+				Column('end_date', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('start_date', css_class=css_class(6, 3)),
+				Column('obsolete_date', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('interrupt_date', css_class=css_class(6, 3)),
+				Column('paying', css_class=css_class(6,3))
+			),
+			Row(
+				Column('service', css_class=css_class(12, 3))
+			),
+			Row(
+				Column('ticket', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('description', css_class=css_class(12, 3))
 			),
 			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
 		)

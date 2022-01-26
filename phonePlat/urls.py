@@ -27,5 +27,8 @@ urlpatterns = [
 	path('service_update/<int:pk>', views.ServiceUpdateView.as_view(), name='service_update'),
 	path('scenario_list/', views.ScenarioListView.as_view(), name='scenario_list'),
 	path('scenario_detail/<int:pk>', views.ScenarioDetailView.as_view(), name='scenario_detail'),
-	path('scenario_update/<int:pk>', views.ScenarioUpdateView.as_view(), name='scenario_update')
+	path('scenario_update/<int:pk>', views.ScenarioUpdateView.as_view(), name='scenario_update'),
+	path('phone_number_list/', views.PhoneNumberListView.as_view(), name='phone_number_list'),
+	path('phone_number_detail/<int:pk>', views.PhoneNumberDetailView.as_view(), name='phone_number_detail'),
+	path('phone_number_update/<int:pk>', views.PhoneNumberUpdateView.as_view(), name='phone_number_update')
 ]

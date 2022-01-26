@@ -99,7 +99,7 @@ def index(request):
 		'paying': '課金番号',
 		'access': 'アクセス回線',
 	}
-	return render(request, 'phonePlat/index.html', {'link_list': link_list})
+	return render(request, 'index.html', {'link_list': link_list})
 
 
 class ServiceListView(LoginRequiredMixin, ListView):
@@ -182,10 +182,35 @@ class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
 	form_class = CrispyScenarioUpdateForm
 
 
-class PhonNumberListView(LoginRequiredMixin, ListView):
+class PhoneNumberListView(LoginRequiredMixin, ListView):
 	model = PhoneNumber
 	template_name = 'phonePlat/phone_number_list.html'
 	paginate_by = 30
+
+	def get_queryset(self):
+		query = self.request.GET.get('q', None)
+		lookups = (
+			Q(number__icontains=query) |
+			Q(parent_number__number__icontains=query) |
+			Q(service__name__icontains=query) |
+			Q(ticket=query)
+		)
+		if query is not None:
+			queryset = super().get_queryset().filter(lookups).distinct().order_by('number')
+		else:
+			queryset = super().get_queryset().order_by('number')
+		return queryset
+
+
+class PhoneNumberDetailView(LoginRequiredMixin, DetailView):
+	model = PhoneNumber
+	template_name = 'phonePlat/phone_number_detail.html'
+
+
+class PhoneNumberUpdateView(LoginRequiredMixin, UpdateView):
+	model = PhoneNumber
+	template_name = 'phonePlat/phone_number_update.html'
+	form_class = CrispyPhoneNumberUpdateForm
 
 
 class IncomingNumberListView(LoginRequiredMixin, ListView):
