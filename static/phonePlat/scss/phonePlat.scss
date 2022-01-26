@@ -1,3 +1,5 @@
+@import "mixin";
+
 $cWhite: white;
 $cBlack: black;
 $cGreen: green;
@@ -10,12 +12,47 @@ $cGreen: green;
 
 .main-title {
   font-family: 'Permanent Marker', cusive;
-  font-size: 40px;
+  font-size: 2em;
   color: $cGreen;
+  & .char {
+    display: inline-block;
+    @include animation(
+      $name: kf-animate-chars,
+      $duration: 0.3s,
+      // $iteration-count: infinite,
+      $timing-function: ease-in-out,
+      $fill-mode: both,
+    );
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.4s;
+      }
+    }
+  }
 
   &:hover {
     cursor: pointer;
   }
+}
+
+@keyframes kf-animate-chars {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80.1% {
+    opacity: 1;
+    transform: translateY(-30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
 }
 
 .index-menu {

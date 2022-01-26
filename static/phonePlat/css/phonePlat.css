@@ -5,13 +5,53 @@
 
 .main-title {
   font-family: "Permanent Marker", cusive;
-  font-size: 40px;
+  font-size: 2em;
   color: green;
+}
+.main-title .char {
+  display: inline-block;
+  animation-name: kf-animate-chars;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: both;
+}
+.main-title .char:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.main-title .char:nth-child(2) {
+  animation-delay: 0.8s;
+}
+.main-title .char:nth-child(3) {
+  animation-delay: 1.2s;
+}
+.main-title .char:nth-child(4) {
+  animation-delay: 1.6s;
 }
 .main-title:hover {
   cursor: pointer;
 }
 
+@keyframes kf-animate-chars {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80.1% {
+    opacity: 1;
+    transform: translateY(-30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .index-menu {
   margin-bottom: 15px;
 }
