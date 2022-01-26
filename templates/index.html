@@ -31,7 +31,9 @@
                 } else if ('{{ key }}' === 'scenario') {
                     location.href = '{% url "phonePlat:scenario_list" %}';
                 } else if ('{{ key }}' === 'phone') {
-                    location.href= '{% url "phonePlat:phone_number_list" %}';
+                    location.href = '{% url "phonePlat:phone_number_list" %}';
+                } else if ('{{ key }}' === 'access'){
+                    location.href = '{% url "phonePlat:access_line_list" %}';
 		        } else {
 	                location.href = '#';
 		        }
