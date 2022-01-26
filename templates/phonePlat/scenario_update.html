@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	
+	<div class="container">
+		<div class="row mb-3">
+			<a href="{% url 'phonePlat:scenario_detail' scenario.pk %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+			<div class="col-9 offset-1">
+				<div class="row">
+					<h3 class="scenario-name mb-3">{{ scenrio.number }} {{ scenario.name }}</h3>
+					<p>作成日時：</p>
+					<p>更新日時：
+						{% if updated_date is not None %}
+							{{ scenario.updated_date }}
+						{% endif %}
+					</p>
+					<p>
+						{% if updated_user is not None %}
+							{{ scenario.updated_user }}
+						{% endif %}
+					</p>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						{% crispy form %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
