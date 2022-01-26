@@ -69,6 +69,11 @@
 .index-menu .menu-card:hover {
   cursor: pointer;
   box-shadow: 5px 5px 20px darkgreen;
+  background-color: green;
+  color: white;
+}
+.index-menu .menu-card:active {
+  transform: scale(0.9);
 }
 
 .list-table {

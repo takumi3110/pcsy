@@ -74,6 +74,11 @@ $cGreen: green;
     &:hover {
       cursor: pointer;
       box-shadow: 5px 5px 20px darkgreen;
+      background-color: $cGreen;
+      color: $cWhite;
+    }
+    &:active {
+        transform: scale(0.9);
     }
   }
 }
