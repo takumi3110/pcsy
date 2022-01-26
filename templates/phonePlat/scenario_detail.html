@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+	<div class="container mt-3">
+		<div class="row mb-5">
+			<a href="{% url 'phonePlat:service_list' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+		<div class="col-9 offset-1">
+			<div class="row">
+				<h3 class="scenario-name mb-3">{{ scenrio.number }} {{ scenario.name }}</h3>
+				<p>作成日時：</p>
+				<p>更新日時：
+					{% if updated_date is not None %}
+						{{ scenario.updated_date }}
+					{% endif %}
+				</p>
+				<p>
+					{% if updated_user is not None %}
+						{{ scenario.updated_user }}
+					{% endif %}
+				</p>
+			</div>
+			<div class="card">
+				<div class="card-body">
+					<div class="row mb-5">
+						<div class="col-2">シナリオNo.</div>
+						<div class="col-6">{{ scenario.number }}</div>
+					</div>
+					<div class="row mb-5">
+						<div class="col-2">シナリオ名</div>
+						<div class="col-6">{{ scenatio.name }}</div>
+					</div>
+					<div class="row mb-5">
+						<div class="col-2">サービス</div>
+						<div class="col-4">
+							{% if scenario.service is not None %}
+								{{ scenario.service }}
+							{% endif %}
+						</div>
+						<div class="col-2">チーム</div>
+						 <div class="col-4">
+							 {% if scenario.team is not None %}
+							    {{ scenario.team }}
+							 {% endif %}
+						 </div>
+					</div>
+					<div class="row mb-5">
+						<div class="col-2">ステータス</div>
+						<div class="col-4">{{ scenario.status }}</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-2">内容</div>
+						<div class="col-10">
+							{% if scenario.description is not None %}
+								{{ scenario.description }}
+							{% else %}
+								<label for="non-text"></label>
+								<input type="text" class="form-control" id="non-text" disabled>
+							{% endif %}
+						</div>
+					</div>
+					<button type="button" class="btn btn-info float-end"
+					        onclick="location.href='{% url "phonePlat:scenario_update" scenario.pk %}'">
+						編集
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
