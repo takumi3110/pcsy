@@ -227,9 +227,7 @@ class CrispyIncomingNumberUpdateForm(IncomingNumberUpdateForm):
 				Column('country', css_class=css_class(6, 3))
 			),
 			Row(
-				Column('description', css_class=css_class(6, 3))
+				Column('description', css_class=css_class(12, 3))
 			),
 			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
-
 		)
-
