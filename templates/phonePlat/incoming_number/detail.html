@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+	<div class="container mt-5">
+		<div class="row mb-5">
+			<a href="{% url 'phonePlat:incoming_number_list' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+		<div class="row mb-5">
+			<div class="col-9 offset-1">
+				<div class="row">
+					<h3 class="incoming_number_name mb-3">{{ incomingnumber }}</h3>
+					<p>作成日時：</p>
+					<p>更新日時：{{ incomingnumber.updated_date }}
+						{% if incomingnumber.updated_user is not None %}
+							{{ incomingnubmer.updated_user }}
+						{% endif %}
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:incoming_number_update" incomingnumber.pk %}'">
+							編集
+						</button>
+					</p>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<div class="row mb-5">
+							<div class="col-2">着信課金番号</div>
+							<div class="col-4">{{ incomingnumber.number }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">着信課金サービス</div>
+							<div class="col-4">{{ incomingnumber.paying_service }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">ステータス</div>
+							<div class="col-4">{{ incomingnumber.status }}</div>
+							<div class="col-2">名義</div>
+							<div class="col-4">
+								{% if incomingnumber.holder is not None %}
+									{{ incomingnumber.holder }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">対象DID</div>
+							<div class="col-4">
+								{% if incomingnumber.target_did is not None %}
+									{{ incomingnumber.target_did }}
+								{% endif %}
+							</div>
+							<div class="col-2">FD-CH数</div>
+							<div class="col-4">{{ incomingnumber.channel_count }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">サービス</div>
+							<div class="col-4">
+								{% if incomingnumber.service is not None %}
+									{{ incomingnumber.service }}
+								{% endif %}
+							</div>
+							<div class="col-2">利用開始日</div>
+							<div class="col-4">
+								{% if incomingnumber.start_date is not None %}
+									{{ incomingnumber.start_date }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">提供対地</div>
+							<div class="col-4">
+								{% if incomingnumber.country is not None %}
+									{{ incomingnumber.country }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							{% if incomingnumber.description is not None %}
+								<div class="col-2">説明</div>
+								<div class="col-10">{{ incomingnumber.description }}</div>
+							{% else %}
+								<div class="col-2">
+									<label for="non-text">説明</label>
+								</div>
+								<div class="col-10">
+									<input type="text" class="form-control" id="non-text" disabled>
+								</div>
+							{% endif %}
+							<div class="col-2"></div>
+						</div>
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:incoming_number_update" incomingnumber.pk %}'">
+							編集
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
