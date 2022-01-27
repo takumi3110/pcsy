@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+	<div class="container my-3">
+		{% include 'snippets/search.html' %}
+		<div class="row">
+			<table class="table table-sm table-bordered table-hover mt-3">
+				<thead class="table-light">
+					<tr>
+						<th>番号</th>
+						<th>着信課金サービス</th>
+						<th>ステータス</th>
+						<th>名義</th>
+						<th>対象DID</th>
+						<th>サービス</th>
+						<th>利用開始日</th>
+						<th>更新日</th>
+						<th>更新者</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for incomingnumber in incomingnumber_list %}
+						<tr id="incomingNumberTable{{ incomingnumber.pk }}" class="list-table">
+							<td>{{ incomingnumber.number }}</td>
+							<td>{{ incomingnumber.paying_service }}</td>
+							<td>{{ incomingnumber.status }}</td>
+							<td>
+								{% if incomingnumber.holder is not None %}
+									{{ incomingnumber.holder }}
+								{% endif %}
+							</td>
+							<td>
+								{% if incomingnumber.target_did is not None %}
+									{{ incomingnumber.target_did }}
+								{% endif %}
+							</td>
+							<td>
+								{% if incomingnumber.service is not None %}
+									{{ incomingnumber.service }}
+								{% endif %}
+							</td>
+							<td>
+								{% if incomingnumber.start_date is not None %}
+									{{ incomingnumber.start_date }}
+								{% endif %}
+							</td>
+							<td>{{ incomingnumber.updated_date }}</td>
+							<td>
+								{% if incomingnumber.updated_user is not None %}
+									{{ incomingnumber.updated_user }}
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			{% include 'pagination.html' %}
+		</div>
+		<div class="row mt-3">
+			<a href="{% url 'phonePlat:index' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block javascript %}
+	<script type="text/javascript">
+        {% for incomingnumber in incomingnumber_list %}
+            let get_incomingNumberTable_{{ incomingnumber.pk }} = document.getElementById('incomingNumberTable{{ incomingnumber.pk }}');
+            get_incomingNumberTable_{{ incomingnumber.pk }}.onclick = function() {
+                location.href = '{% url "phonePlat:incoming_number_detail" incomingnumber.pk %}';
+            }
+        {% endfor %}
+
+	</script>
+
+{% endblock javascript %}
+
