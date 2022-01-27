@@ -186,3 +186,50 @@ class CrispyAccessLineUpdateForm(AccessLineUpdateForm):
 			),
 			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
 		)
+
+
+class IncomingNumberUpdateForm(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		for field in self.fields.values():
+			field.widget.attrs['class'] = 'form-control'
+
+	class Meta:
+		model = IncomingNumber
+		fields = ('number', 'paying_service', 'status', 'holder', 'channel_count', 'target_did', 'service', 'start_date',
+		          'country', 'description')
+
+
+class CrispyIncomingNumberUpdateForm(IncomingNumberUpdateForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.layout = Layout(
+			Row(
+				Column('number', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('paying_service', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('status', css_class=css_class(6, 3)),
+				Column('holder', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('channel_count', css_class=css_class(6, 3)),
+				Column('target_did', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('service', css_class=css_class(6, 3)),
+				Column('start_date', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('country', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('description', css_class=css_class(6, 3))
+			),
+			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
+
+		)
+
