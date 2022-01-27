@@ -3,7 +3,7 @@
 
 {% block content %}
 
-	<div class="container mt-3">
+	<div class="container mt-5">
 		<div class="row mb-5">
 			<a href="{% url 'phonePlat:access_line_list' %}">
 				<i class="fas fa-undo-alt"></i>戻る
@@ -16,7 +16,7 @@
 					<p>作成日時：</p>
 					<p>更新日時：
 						{% if accessline.updated_date is not None %}
-							{{ acccessline.updated_date }}
+							{{ accessline.updated_date }}
 						{% endif %}
 						{% if accessline.updated_user is not None %}
 							{{ accessline.updated_user }}
