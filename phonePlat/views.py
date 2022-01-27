@@ -104,7 +104,7 @@ def index(request):
 
 class ServiceListView(LoginRequiredMixin, ListView):
 	model = Service
-	template_name = 'phonePlat/service_list.html'
+	template_name = 'phonePlat/service/service_list.html'
 	paginate_by = 30
 	ordering = '-number'
 
@@ -133,18 +133,18 @@ class ServiceListView(LoginRequiredMixin, ListView):
 
 class ServiceDetailView(LoginRequiredMixin, DetailView):
 	model = Service
-	template_name = 'phonePlat/service_detail.html'
+	template_name = 'phonePlat/service/service_detail.html'
 
 
 class ServiceUpdateView(LoginRequiredMixin, UpdateView):
 	model = Service
-	template_name = 'phonePlat/service_update.html'
+	template_name = 'phonePlat/service/service_update.html'
 	form_class = CrispyServiceUpdateForm
 
 
 class ScenarioListView(LoginRequiredMixin, ListView):
 	model = Scenario
-	template_name = 'phonePlat/scenario_list.html'
+	template_name = 'phonePlat/scenario/scenario_list.html'
 	paginate_by = 30
 
 	def get_queryset(self):
@@ -173,18 +173,18 @@ class ScenarioListView(LoginRequiredMixin, ListView):
 
 class ScenarioDetailView(LoginRequiredMixin, DetailView):
 	model = Scenario
-	template_name = 'phonePlat/scenario_detail.html'
+	template_name = 'phonePlat/scenario/scenario_detail.html'
 
 
 class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
 	model = Scenario
-	template_name = 'phonePlat/scenario_update.html'
+	template_name = 'phonePlat/scenario/scenario_update.html'
 	form_class = CrispyScenarioUpdateForm
 
 
 class PhoneNumberListView(LoginRequiredMixin, ListView):
 	model = PhoneNumber
-	template_name = 'phonePlat/phone_number_list.html'
+	template_name = 'phonePlat/phone_number/phone_number_list.html'
 	paginate_by = 30
 
 	def get_queryset(self):
@@ -204,19 +204,44 @@ class PhoneNumberListView(LoginRequiredMixin, ListView):
 
 class PhoneNumberDetailView(LoginRequiredMixin, DetailView):
 	model = PhoneNumber
-	template_name = 'phonePlat/phone_number_detail.html'
+	template_name = 'phonePlat/phone_number/phone_number_detail.html'
 
 
 class PhoneNumberUpdateView(LoginRequiredMixin, UpdateView):
 	model = PhoneNumber
-	template_name = 'phonePlat/phone_number_update.html'
+	template_name = 'phonePlat/phone_number/phone_number_update.html'
 	form_class = CrispyPhoneNumberUpdateForm
 
 
 class IncomingNumberListView(LoginRequiredMixin, ListView):
 	model = IncomingNumber
-	template_name = 'phonePlat/incoming_number_list.html'
+	template_name = 'phonePlat/incoming_number/list.html'
 	paginate_by = 30
+
+	def get_queryset(self):
+		query = self.request.GET.get('q', None)
+		lookups = (
+			Q(number__icontains=query) |
+			Q(target_did__icontains=query) |
+			Q(service__name__icontains=query) |
+			Q(paying_service__name__icontains=query)
+		)
+		if query is not None:
+			queryset = super().get_queryset().filter(lookups).distinct().order_by('number')
+		else:
+			queryset = super().get_queryset().order_by('number')
+		return queryset
+
+
+class IncomingNumberDetailView(LoginRequiredMixin, DetailView):
+	model = IncomingNumber
+	template_name = 'phonePlata/incoming_number/detail.html'
+
+
+class IncomingNumberUpdateView(LoginRequiredMixin, UpdateView):
+	model = IncomingNumber
+	template_name = 'phonePlat/incoming_number/update.html'
+	form_class = CrispyIncomingNumberUpdateForm
 
 
 class PayingCodeListView(LoginRequiredMixin, ListView):
@@ -227,7 +252,7 @@ class PayingCodeListView(LoginRequiredMixin, ListView):
 
 class AccessLineListView(LoginRequiredMixin, ListView):
 	model = AccessLine
-	template_name = 'phonePlat/access_line_list.html'
+	template_name = 'phonePlat/access_line/access_line_list.html'
 	paginate_by = 30
 
 	def get_queryset(self):
@@ -246,10 +271,10 @@ class AccessLineListView(LoginRequiredMixin, ListView):
 
 class AccessLineDetailView(LoginRequiredMixin, DetailView):
 	model = AccessLine
-	template_name = 'phonePlat/access_line_detail.html'
+	template_name = 'phonePlat/access_line/access_line_detail.html'
 
 
 class AccessLineUpdateView(LoginRequiredMixin, UpdateView):
 	model = AccessLine
-	template_name = 'phonePlat/access_line_update.html'
+	template_name = 'phonePlat/access_line/access_line_update.html'
 	form_class = CrispyAccessLineUpdateForm
