@@ -36,6 +36,8 @@
                     location.href = '{% url "phonePlat:access_line_list" %}';
                 } else if ('{{ key }}' === 'incoming') {
                     location.href = '{% url "phonePlat:incoming_number_list" %}';
+                } else if ('{{ key }}' === 'paying') {
+                    location.href = '{% url "phonePlat:paying_code_list" %}';
 		        } else {
 	                location.href = '#';
 		        }
