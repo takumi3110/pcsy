@@ -96,7 +96,7 @@ def index(request):
 		'scenario': 'シナリオ',
 		'phone': '電話番号',
 		'incoming': '着信課金番号',
-		'paying': '課金番号',
+		'paying': '課金コード',
 		'access': 'アクセス回線',
 	}
 	return render(request, 'index.html', {'link_list': link_list})
@@ -246,8 +246,33 @@ class IncomingNumberUpdateView(LoginRequiredMixin, UpdateView):
 
 class PayingCodeListView(LoginRequiredMixin, ListView):
 	model = PayingCode
-	template_name = 'phonePlat/paying_code_list.html'
+	template_name = 'phonePlat/paying_code/list.html'
 	paginate_by = 30
+
+	def get_queryset(self):
+		query = self.request.GET.get('q', None)
+		lookups = (
+			Q(code__icontains=query) |
+			Q(service__name__icontains=query) |
+			Q(dept__name__icontains=query) |
+			Q(target__icontains=query)
+		)
+		if query is not None:
+			queryset = super().get_queryset().filter(lookups).distinct().order_by('code')
+		else:
+			queryset = super().get_queryset().order_by('code')
+		return queryset
+
+
+class PayingCodeDetailView(LoginRequiredMixin, DetailView):
+	model = PayingCode
+	template_name = 'phonePlat/paying_code/detail.html'
+
+
+class PayingCodeUpdateView(LoginRequiredMixin, UpdateView):
+	model = PayingCode
+	template_name = 'phonePlat/paying_code/update.html'
+	form_class = CrispyPayingCodeUpdateForm
 
 
 class AccessLineListView(LoginRequiredMixin, ListView):
