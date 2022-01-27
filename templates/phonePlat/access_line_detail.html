@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+	<div class="container mt-3">
+		<div class="row mb-5">
+			<a href="{% url 'phonePlat:service_list' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+		<div class="row mb-5">
+			<div class="col-9 offset-1">
+				<div class="row">
+					<h3 class="access_line_name mb-3">{{ accessline }}</h3>
+					<p>作成日時：</p>
+					<p>更新日時：
+						{% if accessline.updated_date is not None %}
+							{{ acccessline.updated_date }}
+						{% endif %}
+						{% if accessline.updated_user is not None %}
+							{{ accessline.updated_user }}
+						{% endif %}
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:access_line_update" accessline.pk %}'">
+							編集
+						</button>
+					</p>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<div class="row mb-5">
+							<div class="col-2">ロケーション</div>
+							<div class="col-4">{{ accessline.location }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">システム</div>
+							<div class="col-4">
+								{% if accessline.system is not None %}
+									{{ accessline.system }}
+								{% endif %}
+							</div>
+							<div class="col-2">ステータス</div>
+							<div class="col-4">{{ accessline.status }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">親番号</div>
+							<div class="col-4">
+								{% if accessline.parent_nubmer is not None %}
+									{{ accessline.parent_number }}
+								{% endif %} 
+							</div>
+							<div class="col-2">開通日</div>
+							<div class="col-4">
+								{% if accessline.opening_date is not None %}
+									{{ accessline.opening_date }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">契約番号</div>
+							<div class="col-2">
+								{% if accessline.contract_numbmer is not None %}
+									{{ accessline.contract_number }}
+								{% endif %} 
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">
+								<label for="proportion{{ accessline.pk }}">按分集計対象</label>
+							</div>
+							<div class="col-4">
+								<input type="checkbox" class="form-check-input" id="proportion{{ accessline.pk }}"
+								value="" disabled {% if accessline.proportion %}checked{% endif %}>
+							</div>
+							<div class="col-2">しきい値</div>
+							<div class="col-4">{{ accessline.threshold_value }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">余剰数</div>
+							<div class="col-4">{{ accessline.surplus_count }}</div>
+							<div class="col-2">余裕数</div>
+							<div class="col-4">{{ accessline.allowance_count }}</div>
+						</div>
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:access_line_update" accessline.pk %}'">
+							編集
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock content %}
