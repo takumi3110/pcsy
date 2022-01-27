@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+	<div class="container my-3">
+		{% include 'snippets/search.html' %}
+		<div class="row">
+			<table class="table-sm table-bordered table-hover mt-3">
+				<thead class="table-light">
+					<tr>
+						<th>課金コード</th>
+						<th>ステータス</th>
+						<th>サービス</th>
+						<th>部門</th>
+						<th>対象DID</th>
+						<th>利用開始日</th>
+						<th>利用終了日</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for payingcode in payingcode_list %}
+						<tr id="payingCodeTable{{ payingcode.pk }}" class="list-table">
+							<td>{{ payingcode.code }}</td>
+							<td>{{ payingcode.status }}</td>
+							<td>
+								{% if payingcode.service is not None %}
+									{{ payingcode.service }}
+								{% endif %}
+							</td>
+							<td>
+								{% if payingcode.dept is not None %}
+									{{ payingcode.dept }}
+								{% endif %}
+							</td>
+							<td>
+								{% if payingcode.target is not None %}
+									{{ payingcode.target }}
+								{% endif %}
+							</td>
+							<td>
+								{% if payingcode.start_date is not None %}
+									{{ payingcode.start_date }}
+								{% endif %}
+							</td>
+							<td>
+								{% if payingcode.end_date is not None %}
+									{{ payingcode.end_date }}
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			{% include 'pagination.html' %}
+		</div>
+		<div class="row mt-3">
+			<a href="{% url 'phonePlat:index' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+	</div>
+
+{% endblock content %}
+
+{% block javascript %}
+	<script type="text/javascript">
+        {% for payingcode in payingcode_list %}
+            let get_paying_code_table_{{ payingcode.pk }} = document.getElementById('payingCodeTable{{ payingcode.pk }}');
+            get_paying_code_table_{{ payingcode.pk }}.onclick = function() {
+                location.href = '{% url "phonePlat:paying_code_detail" payingcode.pk %}';
+            }
+        {% endfor %}
+
+	</script>
+
+{% endblock javascript %}
