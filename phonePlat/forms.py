@@ -10,6 +10,7 @@ def css_class(column, bottom):
 	margin_bottom = 'mb-' + str(bottom)
 	return 'form-group ' + col + ' ' + margin_bottom
 
+
 class ServiceUpdateForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -128,7 +129,7 @@ class CrispyPhoneNumberUpdateForm(PhoneNumberUpdateForm):
 			),
 			Row(
 				Column('interrupt_date', css_class=css_class(6, 3)),
-				Column('paying', css_class=css_class(6,3))
+				Column('paying', css_class=css_class(6, 3))
 			),
 			Row(
 				Column('service', css_class=css_class(12, 3))
@@ -148,6 +149,7 @@ class AccessLineUpdateForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		for field in self.fields.values():
 			field.widget.attrs['class'] = 'form-control'
+		self.fields['proportion'].widget.attrs['class'] = 'form-check-input'
 
 	class Meta:
 		model = AccessLine
@@ -159,4 +161,28 @@ class CrispyAccessLineUpdateForm(AccessLineUpdateForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.helper = FormHelper()
-		self.helper.layout = Layout()
+		self.helper.layout = Layout(
+			Row(
+				Column('location', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('system', css_class=css_class(6, 3)),
+				Column('status', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('parent_number', css_class=css_class(6, 3)),
+				Column('opening_date', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('contract_number', css_class=css_class(6, 3)),
+			),
+			Row(
+				Column('proportion', css_class=css_class(6, 3)),
+				Column('threshold_value', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('surplus_count', css_class=css_class(6, 3)),
+				Column('allowance_count', css_class=css_class(6, 3))
+			),
+			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
+		)
