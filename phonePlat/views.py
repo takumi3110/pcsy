@@ -235,7 +235,7 @@ class IncomingNumberListView(LoginRequiredMixin, ListView):
 
 class IncomingNumberDetailView(LoginRequiredMixin, DetailView):
 	model = IncomingNumber
-	template_name = 'phonePlata/incoming_number/detail.html'
+	template_name = 'phonePlat/incoming_number/detail.html'
 
 
 class IncomingNumberUpdateView(LoginRequiredMixin, UpdateView):
