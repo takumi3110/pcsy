@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+	<div class="container my-5">
+		<div class="row mb-5">
+			<a href="{% url 'phonePlat:paying_code_list' %}">
+				<i class="fas fa-undo-alt"></i>戻る
+			</a>
+		</div>
+		<div class="row mb-5">
+			<div class="col-9 offset-1">
+				<div class="row">
+					<h3 class="paying_code_name mb-3">{{ payingcode }}</h3>
+					<p>
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:paying_code_update" payingcode.pk %}'">
+							編集
+						</button>
+					</p>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<div class="row mb-5">
+							<div class="col-2">課金コード</div>
+							<div class="col-4">{{ payingcode.code }}</div>
+							<div class="col-2">ステータス</div>
+							<div class="col-4">{{ payingcode.status }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">サービス</div>
+							<div class="col-4">{{ payingcode.service }}</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">部門</div>
+							<div class="col-4">
+								{% if payingcode.dept is not None %}
+									{{ payingcode.dept }}
+								{% endif %}
+							</div>
+							<div class="col-2">対象DID</div>
+							<div class="col-4">
+								{% if payingcode.target is not None %}
+									{{ payingcode.target }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">利用開始日</div>
+							<div class="col-2">
+								{% if payingcode.start_date is not None %}
+									{{ payingcode.start_date }}
+								{% endif %}
+							</div>
+							<div class="col-2">利用終了日</div>
+							<div class="col-2">
+								{% if payingcode.end_date is not None %}
+									{{ payingcode.end_date }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">
+								<label for="tems{{ payingcode.pk }}">TEMS連携</label>
+							</div>
+							<div class="col-4">
+								<input type="checkbox" class="form-check-input" id="tems{{ payingcode.pk }}" disabled
+								value="" {% if payingcode.tems %}checked{% endif %}>
+							</div>
+							<div class="col-2">TEMS反映日</div>
+							<div class="col-4">
+								{% if payingcode.tems_date is not None %}
+									{{ payingcode.tems_date }}
+								{% endif %}
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col-2">チケット番号</div>
+							<div class="col-2"></div>
+						</div>
+						<button type="button" class="btn btn-info float-end"
+						        onclick="location.href='{% url "phonePlat:paying_code_update" payingcode.pk %}'">
+							編集
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
