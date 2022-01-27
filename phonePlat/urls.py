@@ -36,5 +36,8 @@ urlpatterns = [
 	path('access_line_update/<int:pk>', views.AccessLineUpdateView.as_view(), name='access_line_update'),
 	path('incoming_number_list/', views.IncomingNumberListView.as_view(), name='incoming_number_list'),
 	path('incoming_number_detail/<int:pk>', views.IncomingNumberDetailView.as_view(), name='incoming_number_detail'),
-	path('incoming_number_update/<int:pk>', views.IncomingNumberUpdateView.as_view(), name='incoming_number_update')
+	path('incoming_number_update/<int:pk>', views.IncomingNumberUpdateView.as_view(), name='incoming_number_update'),
+	path('paying_code_list/', views.PayingCodeListView.as_view(), name='paying_code_list'),
+	path('paying_code_detail/<int:pk>', views.PayingCodeDetailView.as_view(), name='paying_code_detail'),
+	path('paying_code_update/<int:pk>', views.PayingCodeUpdateView.as_view(), name='paying_code_update')
 ]
