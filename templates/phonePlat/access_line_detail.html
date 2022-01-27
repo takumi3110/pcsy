@@ -5,7 +5,7 @@
 
 	<div class="container mt-3">
 		<div class="row mb-5">
-			<a href="{% url 'phonePlat:service_list' %}">
+			<a href="{% url 'phonePlat:access_line_list' %}">
 				<i class="fas fa-undo-alt"></i>戻る
 			</a>
 		</div>
@@ -46,7 +46,7 @@
 						<div class="row mb-5">
 							<div class="col-2">親番号</div>
 							<div class="col-4">
-								{% if accessline.parent_nubmer is not None %}
+								{% if accessline.parent_number is not None %}
 									{{ accessline.parent_number }}
 								{% endif %} 
 							</div>
@@ -60,7 +60,7 @@
 						<div class="row mb-5">
 							<div class="col-2">契約番号</div>
 							<div class="col-2">
-								{% if accessline.contract_numbmer is not None %}
+								{% if accessline.contract_number is not None %}
 									{{ accessline.contract_number }}
 								{% endif %} 
 							</div>
