@@ -231,3 +231,48 @@ class CrispyIncomingNumberUpdateForm(IncomingNumberUpdateForm):
 			),
 			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
 		)
+
+
+class PayingCodeUpdateForm(forms.ModelForm):
+	def __init__(self, *args, **kwargs):
+		super(PayingCodeUpdateForm, self).__init__(*args, **kwargs)
+		for field in self.fields.values():
+			field.widget.attrs['class'] = 'form-control'
+		self.fields['tems'].widget.attrs['class'] = 'form-check-input'
+
+	class Meta:
+		model = PayingCode
+		fields = ('code', 'status', 'service', 'dept', 'target', 'start_date', 'end_date', 'tems', 'tems_date',
+		          'file', 'ticket_number')
+
+
+class CrispyPayingCodeUpdateForm(PayingCodeUpdateForm):
+	def __init__(self):
+		super(CrispyPayingCodeUpdateForm, self).__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.layout = Layout(
+			Row(
+				Column('code', css_class=css_class(6, 3)),
+				Column('status', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('service', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('dept', css_class=css_class(6, 3)),
+				Column('target', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('start_date', css_class=css_class(6, 3)),
+				Column('end_date', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('tems', css_class=css_class(6, 3)),
+				Column('tems_date', css_class=css_class(6, 3))
+			),
+			Row(
+				Column('ticket', css_class=css_class(6, 3))
+			),
+			'file',
+			Submit('submit', '更新', css_class='col-12 btn btn-block btn-info')
+		)
