@@ -62,5 +62,6 @@ class ParentNumberAdmin(admin.ModelAdmin):
 	list_display_links = ('number', 'status', 'line_category')
 	list_filter = ('number', 'status', 'line_category')
 	search_fields = ('number', 'line_category__name')
+	ordering = ['number']
 	actions_on_bottom = True
 	inlines = [ServiceInline, AccessLineInline]
