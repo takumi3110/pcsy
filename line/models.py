@@ -140,10 +140,11 @@ class ParentNumber(models.Model):
 	)
 
 	def __str__(self):
-		return self.number
+		if '単独' in self.number:
+			return f'{self.number} {self.line_category}'
+		else:
+			return self.number
 
 	class Meta:
 		verbose_name = '親番号'
 		verbose_name_plural = '親番号'
-
-
