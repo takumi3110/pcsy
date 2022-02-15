@@ -96,7 +96,7 @@ class PhoneNumberUpdateForm(forms.ModelForm):
 
 	class Meta:
 		model = PhoneNumber
-		fields = ('number', 'status', 'system', 'parent_number', 'dept', 'opening_date', 'end_date', 'start_date',
+		fields = ('number', 'status', 'system', 'access_line', 'dept', 'opening_date', 'end_date', 'start_date',
 		          'obsolete_date', 'interrupt_date', 'paying', 'service', 'ticket', 'description')
 
 
