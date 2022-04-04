@@ -1,8 +1,6 @@
-@import "mixin";
+@import "../modules/mixin";
+@import "../modules/variables";
 
-$cWhite: white;
-$cBlack: black;
-$cGreen: green;
 
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
@@ -55,30 +53,33 @@ $cGreen: green;
   
 }
 
-.index-menu {
-  margin-bottom: 15px;
+.index {
+  &__menu {
+    margin-bottom: 15px;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  & .menu-card {
-    height: 100px;
-    text-align: center;
-    border-radius: 10px;
-
-    & .card-value {
-      font-size: 20px;
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    &:hover {
-      cursor: pointer;
-      box-shadow: 5px 5px 20px darkgreen;
-      background-color: $cGreen;
-      color: $cWhite;
-    }
-    &:active {
+    & .card {
+      height: 100px;
+      text-align: center;
+      border-radius: 10px;
+
+      & .value {
+        font-size: 20px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 5px 5px 20px darkgreen;
+        background-color: $cGreen;
+        color: $cWhite;
+      }
+
+      &:active {
         transform: scale(0.9);
+      }
     }
   }
 }

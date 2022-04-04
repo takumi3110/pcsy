@@ -52,27 +52,27 @@
     transform: translateY(0);
   }
 }
-.index-menu {
+.index__menu {
   margin-bottom: 15px;
 }
-.index-menu:last-child {
+.index__menu:last-child {
   margin-bottom: 0;
 }
-.index-menu .menu-card {
+.index__menu .card {
   height: 100px;
   text-align: center;
   border-radius: 10px;
 }
-.index-menu .menu-card .card-value {
+.index__menu .card .value {
   font-size: 20px;
 }
-.index-menu .menu-card:hover {
+.index__menu .card:hover {
   cursor: pointer;
   box-shadow: 5px 5px 20px darkgreen;
   background-color: green;
   color: white;
 }
-.index-menu .menu-card:active {
+.index__menu .card:active {
   transform: scale(0.9);
 }
 
