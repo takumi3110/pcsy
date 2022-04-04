@@ -4,12 +4,12 @@
 {% block content %}
 	
 	<div class="container mt-5">
-		<div class="row">
+		<div class="row index">
 			{% for key, value in link_list.items %}
-				<div class="col-3 index-menu">
-					<div class="card menu-card" id="index-{{ key }}">
+				<div class="col-3 index__menu">
+					<div class="card" id="index{{ key }}">
 						<div class="card-body">
-							<span class="card-value">
+							<span class="value">
 								{{ value }}
 							</span>
 						</div>
@@ -24,7 +24,7 @@
 {% block javascript %}
 	<script type="text/javascript">
         {% for key, value in link_list.items %}
-	        let get_{{ key }} = document.getElementById("index-{{ key }}");
+	        let get_{{ key }} = document.querySelector("#index{{ key }}");
 	        get_{{ key }}.onclick = function() {
 		        if ('{{ key }}' === 'service') {
                     location.href = '{% url "phonePlat:service_list" %}';
