@@ -1,15 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 .page-wrapper {
   position: relative;
 }
 
-.main-title {
-  font-family: "Permanent Marker", cusive;
-  font-size: 2em;
-  color: green;
+.body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
-.main-title .char {
-  display: inline-block;
+
+.header {
+  position: relative;
+}
+.header .logo {
+  padding: 3px 0;
+}
+.header .logo img {
+  display: block;
+  float: left;
+  margin: 3px 5px 0;
+}
+.header .logo .animate-title .char {
+  display: block;
+  float: left;
+  padding: 0 0 0 5px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #696969;
+  text-decoration: none;
   animation-name: kf-animate-chars;
   animation-duration: 0.2s;
   animation-timing-function: ease-in-out;
@@ -18,20 +36,55 @@
   animation-direction: normal;
   animation-fill-mode: both;
 }
-.main-title .char:nth-child(1) {
+.header .logo .animate-title .char:nth-child(1) {
   animation-delay: 0.2s;
 }
-.main-title .char:nth-child(2) {
+.header .logo .animate-title .char:nth-child(2) {
   animation-delay: 0.4s;
 }
-.main-title .char:nth-child(3) {
+.header .logo .animate-title .char:nth-child(3) {
   animation-delay: 0.6s;
 }
-.main-title .char:nth-child(4) {
+.header .logo .animate-title .char:nth-child(4) {
   animation-delay: 0.8s;
 }
-.main-title:hover {
+.header .logo .animate-title:hover {
   cursor: pointer;
+}
+.header .navigation {
+  background-color: #908677;
+  border-radius: 25px 5px 5px 25px;
+  position: absolute;
+  top: 0;
+  right: 5px;
+  margin: 5px 0;
+  width: 50%;
+  height: 40px;
+}
+.header .navigation__item:hover {
+  background-color: #817865;
+}
+.header .navigation__item .menu {
+  color: white;
+  text-decoration: none;
+  margin: 0 3rem;
+}
+.header .navigation__item .icon {
+  color: #d19405;
+}
+.header .navigation__item .dropdown-menu.show {
+  color: black;
+  background-color: #feeebd;
+  border: thin solid #ffa500;
+}
+.header .navigation__item .dropdown-menu.show:hover {
+  background-color: white;
+}
+.header .navigation__search {
+  margin: 0 5px;
+}
+.header .navigation__search input {
+  height: 25px;
 }
 
 @keyframes kf-animate-chars {
@@ -60,23 +113,31 @@
 }
 .index__menu .card {
   height: 100px;
-  text-align: center;
+  text-align: left;
   border-radius: 10px;
+  border: solid 2px #ffa500;
 }
 .index__menu .card .value {
   font-size: 20px;
 }
 .index__menu .card:hover {
   cursor: pointer;
-  box-shadow: 5px 5px 20px darkgreen;
-  background-color: green;
-  color: white;
+  box-shadow: 5px 5px 20px #ffa500;
 }
 .index__menu .card:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
-.list-table {
+.result .table {
+  --bs-table-striped-bg: rgba(0, 200, 255, 0.15);
+}
+.result .table__header {
+  color: white;
+  background-color: #908677;
+  border-radius: 5px;
+  height: 40px;
+}
+.result .list-table {
   cursor: pointer;
 }
 

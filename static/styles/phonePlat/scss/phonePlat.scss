@@ -1,37 +1,105 @@
 @import "../modules/mixin";
 @import "../modules/variables";
-
-
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 .page-wrapper {
   position: relative;
 }
 
-.main-title {
-  font-family: 'Permanent Marker', cusive;
-  font-size: 2em;
-  color: $cGreen;
-  & .char {
-    display: inline-block;
-    @include animation(
-      $name: kf-animate-chars,
-      $duration: 0.2s,
-      // $iteration-count: infinite,
-      $timing-function: ease-in-out,
-      $fill-mode: both,
-    );
-    @for $i from 1 through 4 {
-      &:nth-child(#{$i}) {
-        animation-delay: $i * 0.2s;
+.body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+.header {
+  position: relative;
+  .logo {
+  padding: 3px 0;
+
+  & img {
+    display: block;
+    float: left;
+    margin: 3px 5px 0;
+  }
+
+  & .animate-title {
+  //font-family: 'Permanent Marker', cusive;
+  //font-size: 2em;
+  //color: $cGreen;
+
+    & .char {
+      display: block;
+      float: left;
+      padding: 0 0 0 5px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #696969;
+      text-decoration: none;
+      @include animation(
+        $name: kf-animate-chars,
+        $duration: 0.2s,
+        // $iteration-count: infinite,
+        $timing-function: ease-in-out,
+        $fill-mode: both,
+      );
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.2s;
+        }
+      }
+    }
+
+    &:hover {
+        cursor: pointer;
+      }
+    }
+
+  }
+  & .navigation {
+    background-color: $cBg;
+    border-radius: 25px 5px 5px 25px;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    margin: 5px 0;
+    width: 50%;
+    height: 40px;
+
+    &__item {
+      &:hover {
+        background-color: #817865;
+      }
+      & .menu {
+        color: $cWhite;
+        text-decoration: none;
+        margin: 0 3rem;
+      }
+
+      & .icon {
+        color: $cIcon;
+      }
+
+      & .dropdown-menu.show {
+        color: black;
+        background-color: #feeebd;
+        border: thin solid $cBorder;
+        &:hover {
+          background-color: $cWhite;
+        }
+      }
+    }
+    &__search {
+      margin: 0 5px;
+      & input {
+        height: 25px;
       }
     }
   }
-
-  &:hover {
-    cursor: pointer;
-  }
 }
+
+
 
 @keyframes kf-animate-chars {
   0% {
@@ -53,6 +121,9 @@
   
 }
 
+
+
+
 .index {
   &__menu {
     margin-bottom: 15px;
@@ -63,8 +134,9 @@
 
     & .card {
       height: 100px;
-      text-align: center;
+      text-align: left;
       border-radius: 10px;
+      border: solid 2px #ffa500;
 
       & .value {
         font-size: 20px;
@@ -72,21 +144,33 @@
 
       &:hover {
         cursor: pointer;
-        box-shadow: 5px 5px 20px darkgreen;
-        background-color: $cGreen;
-        color: $cWhite;
+        box-shadow: 5px 5px 20px $cBorder;
       }
 
       &:active {
-        transform: scale(0.9);
+        transform: scale(0.95);
       }
     }
   }
 }
 
-.list-table {
-  cursor: pointer;
+.result {
+  & .table {
+    --bs-table-striped-bg: rgba(0, 200, 255, 0.15);
+    &__header {
+      color: $cWhite;
+      background-color: $cBg;
+      border-radius: 5px;
+      height: 40px;
+
+    }
+  }
+  .list-table {
+    cursor: pointer;
+  }
+
 }
+
 
 .st-footer {
   color: $cWhite;
