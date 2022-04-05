@@ -20,25 +20,47 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-fixed-top">
-        <a class="navbar-brand ms-4 main-title" href="{% url 'phonePlat:index' %}">
-	        <span class="char">p</span>
-	        <span class="char">n</span>
-	        <span class="char">p</span>
-	        <span class="char">s</span>
-        </a>
-        <button aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え" class="navbar-toggler" data-target="#Navbar"
-                data-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="Navbar">
-            <ul class="navbar-nav">
-                {% if user.is_superuser %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'admin:index' %}">AdminPage</a>
-                    </li>
-                {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-fixed-top header">
+        <h2 class="logo">
+	        <a class="navbar-brand animate-title" href="{% url 'phonePlat:index' %}">
+		        <img src="{% static 'images/logo-corp.png' %}" alt="logo">
+		        <span class="char">電話基盤管理システム</span>
+	        </a>
+        </h2>
+{#        <button aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え" class="navbar-toggler" data-target="#Navbar"#}
+{#                data-toggle="collapse" type="button">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+        <div class="collapse navbar-collapse justify-content-end navigation" id="Navbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navigation__item">
+	            <li class="nav-item dropdown">
+		            <a href="#" class="nav-link dropdown-toggle menu" id="navbarDropdown" role="button"
+		               data-bs-toggle="dropdown" aria-expanded="false">
+			            <i class="fa-solid fa-gear icon"></i>
+			            管理
+		            </a>
+		            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			            <li><a href="{% url 'admin:index' %}" class="dropdown-item">管理画面</a></li>
+		            </ul>
+	            </li>
             </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0 navigation__item">
+	            <li class="nav-item dropdown">
+		            <a href="#" class="nav-link dropdown-toggle menu" id="navbarDropdown" role="button"
+		               data-bs-toggle="dropdown" aria-expanded="false">
+			            <i class="fa-solid fa-user icon"></i>
+			            {{ request.user }}
+		            </a>
+		            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			            <li><a href="{% url 'admin:logout' %}" class="dropdown-item">ログアウト</a></li>
+		            </ul>
+	            </li>
+            </ul>
+	        <div class="navigation__search">
+		        <form action="#" class="d-flex">
+			        <input type="search" class="form-control" placeholder="検索" aria-label="Search">
+		        </form>
+	        </div>
         </div>
     </nav>
     <div class="page-wrapper chiller-theme">
