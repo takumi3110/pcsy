@@ -3,11 +3,32 @@
 
 {% block content %}
 
-	<div class="container mt-3">
-		{% include 'snippets/search.html' %}
-		<div class="row">
-			<table class="table table-sm table-bordered table-hover mt-3">
-				<thead class="table-light">
+	<div class="container scenario">
+		<div class="row my-3">
+			<nav>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{% url 'phonePlat:index' %}">TOP</a>
+					</li>
+					<li class="breadcrumb-item active">
+						<span>シナリオ</span>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<section class="search">
+			<div class="search__filter">
+				<i class="fa-solid fa-folder-open icon"></i>
+				<span class="menu">フィルタ：</span>
+			</div>
+			<div class="search__result">
+				<i class="fa-solid fa-folder-open icon"></i>
+				<span class="menu">集計：</span>
+			</div>
+		</section>
+		<section class="row my-3 result">
+			<table class="table table-sm table-striped table-hover mt-3">
+				<thead class="table__header">
 					<tr>
 						<th>シナリオNo.</th>
 						<th>シナリオ名</th>
@@ -25,7 +46,7 @@
 								{{ scenario.number }}
 								{% endif %}
 							</td>
-							<td>{{ scenario.name }}</td>
+							<td><a href="#">{{ scenario.name }}</a></td>
 							<td>
 								{% if scenario.sevice is not None %}
 									{{ scenario.service }}
@@ -43,7 +64,7 @@
 					{% endfor %}
 				</tbody>
 			</table>
-		</div>
+		</section>
 		<div class="row">
 			{% include 'pagination.html' %}
 		</div>
