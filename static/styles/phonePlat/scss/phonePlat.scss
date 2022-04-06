@@ -193,9 +193,21 @@
   }
 
   & .filter {
+    margin-bottom: 10px;
+
+    & .open-filter {
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     &__open {
       @extend .search-open;
+      &-menu {
+        &:hover {
+          cursor: pointer;
+        }
+      }
       & button {
         @extend .button-style;
       }
@@ -215,11 +227,22 @@
   }
 
   & .result {
+    & .open-result {
+      &:hover {
+        cursor: pointer;
+      }
+    }
     &__open {
       @extend .search-open;
-      & button {
-        border: none;
+      &-menu {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &-button {
+        border: solid silver;
         border-radius: 5px;
+        background-color: silver;
       }
     }
   }

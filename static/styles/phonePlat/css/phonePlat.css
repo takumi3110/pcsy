@@ -163,6 +163,15 @@
 .search .open {
   margin: 5px;
 }
+.search .filter {
+  margin-bottom: 10px;
+}
+.search .filter .open-filter:hover {
+  cursor: pointer;
+}
+.search .filter__open-menu:hover {
+  cursor: pointer;
+}
 .search .filter__open .system {
   display: flex;
 }
@@ -172,9 +181,16 @@
 .search .filter__open .system input {
   height: 30px;
 }
-.search .result__open button {
-  border: none;
+.search .result .open-result:hover {
+  cursor: pointer;
+}
+.search .result__open-menu:hover {
+  cursor: pointer;
+}
+.search .result__open-button {
+  border: solid silver;
   border-radius: 5px;
+  background-color: silver;
 }
 
 .st-footer {
