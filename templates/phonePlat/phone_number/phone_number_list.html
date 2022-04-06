@@ -3,9 +3,20 @@
 
 {% block content %}
 
-	<div class="container mt-3">
-		{% include 'snippets/search.html' %}
-		<div class="row">
+	<div class="container mb-5 phone-number">
+		<div class="row mb-5">
+			<nav>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{% url 'phonePlat:index' %}">TOP</a>
+					</li>
+					<li class="breadcrumb-item active">
+						<span>電話番号一覧</span>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<section class="row category">
 			<div class="form-group col-3 mb-3">
 				<label for="categorySelect">カテゴリー：</label>
 				<select name="category" id="categorySelect" title="category" class="custom-select category-select">
@@ -17,10 +28,20 @@
 					<option value="surplus">余剰</option>
 				</select>
 			</div>
-		</div>
-		<div class="row">
-			<table class="table table-sm table-bordered table-hover mt-3">
-				<thead class="table-light">
+		</section>
+		<section class="search">
+			<div class="search__filter">
+				<i class="fa-solid fa-folder-open icon"></i>
+				<span class="menu">フィルタ：</span>
+			</div>
+			<div class="search__result">
+				<i class="fa-solid fa-folder-open icon"></i>
+				<span class="menu">集計：</span>
+			</div>
+		</section>
+		<section class="row my-3 result">
+			<table class="table table-sm table-striped table-bordered table-hover mt-3">
+				<thead class="table__header">
 					<tr>
 						<th>カテゴリー</th>
 						<th>電話番号</th>

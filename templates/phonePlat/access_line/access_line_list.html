@@ -3,11 +3,32 @@
 
 {% block content %}
 
-	<div class="container mt-3">
-		{% include 'snippets/search.html' %}
-		<div class="row">
-			<table class="table table-sm table-bordered table-hover mt-3">
-				<thead class="table-light">
+	<div class="container mb-5">
+		<div class="row mb-5">
+			<nav>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="{% url 'phonePlat:index' %}">TOP</a>
+					</li>
+					<li class="breadcrumb-item active">
+						<span>アクセス回線一覧</span>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<section class="search">
+			<div class="search__filter">
+				<i class="fa-solid fa-folder-open icon"></i>
+				<span class="menu">フィルタ：</span>
+			</div>
+			<div class="search__result">
+				<i class="fa-solid fa-folder-open icon"></i>
+				<span class="menu">集計：</span>
+			</div>
+		</section>
+		<section class="row my-3 result">
+			<table class="table table-sm table-striped table-bordered table-hover mt-3">
+				<thead class="table__header">
 					<tr>
 						<th>ロケーション</th>
 						<th>システム</th>
@@ -50,7 +71,7 @@
 					{% endfor %}
 				</tbody>
 			</table>
-		</div>
+		</section>
 		<div class="row">
 			{% include 'pagination.html' %}
 		</div>
