@@ -104,7 +104,7 @@ def index(request):
 
 class ServiceListView(LoginRequiredMixin, ListView):
 	model = Service
-	template_name = 'phonePlat/service/service_list.html'
+	template_name = 'phonePlat/service/list.html'
 	paginate_by = 30
 	ordering = '-number'
 
@@ -133,18 +133,18 @@ class ServiceListView(LoginRequiredMixin, ListView):
 
 class ServiceDetailView(LoginRequiredMixin, DetailView):
 	model = Service
-	template_name = 'phonePlat/service/service_detail.html'
+	template_name = 'phonePlat/service/detail.html'
 
 
 class ServiceUpdateView(LoginRequiredMixin, UpdateView):
 	model = Service
-	template_name = 'phonePlat/service/service_update.html'
+	template_name = 'phonePlat/service/update.html'
 	form_class = CrispyServiceUpdateForm
 
 
 class ScenarioListView(LoginRequiredMixin, ListView):
 	model = Scenario
-	template_name = 'phonePlat/scenario/scenario_list.html'
+	template_name = 'phonePlat/scenario/list.html'
 	paginate_by = 30
 
 	def get_queryset(self):
@@ -173,18 +173,18 @@ class ScenarioListView(LoginRequiredMixin, ListView):
 
 class ScenarioDetailView(LoginRequiredMixin, DetailView):
 	model = Scenario
-	template_name = 'phonePlat/scenario/scenario_detail.html'
+	template_name = 'phonePlat/scenario/detail.html'
 
 
 class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
 	model = Scenario
-	template_name = 'phonePlat/scenario/scenario_update.html'
+	template_name = 'phonePlat/scenario/update.html'
 	form_class = CrispyScenarioUpdateForm
 
 
 class PhoneNumberListView(LoginRequiredMixin, ListView):
 	model = PhoneNumber
-	template_name = 'phonePlat/phone_number/phone_number_list.html'
+	template_name = 'phonePlat/phone_number/list.html'
 	paginate_by = 30
 
 	def get_queryset(self):
@@ -204,12 +204,12 @@ class PhoneNumberListView(LoginRequiredMixin, ListView):
 
 class PhoneNumberDetailView(LoginRequiredMixin, DetailView):
 	model = PhoneNumber
-	template_name = 'phonePlat/phone_number/phone_number_detail.html'
+	template_name = 'phonePlat/phone_number/detail.html'
 
 
 class PhoneNumberUpdateView(LoginRequiredMixin, UpdateView):
 	model = PhoneNumber
-	template_name = 'phonePlat/phone_number/phone_number_update.html'
+	template_name = 'phonePlat/phone_number/update.html'
 	form_class = CrispyPhoneNumberUpdateForm
 
 
@@ -277,7 +277,7 @@ class PayingCodeUpdateView(LoginRequiredMixin, UpdateView):
 
 class AccessLineListView(LoginRequiredMixin, ListView):
 	model = AccessLine
-	template_name = 'phonePlat/access_line/access_line_list.html'
+	template_name = 'phonePlat/access_line/list.html'
 	paginate_by = 30
 
 	def get_queryset(self):
@@ -296,10 +296,10 @@ class AccessLineListView(LoginRequiredMixin, ListView):
 
 class AccessLineDetailView(LoginRequiredMixin, DetailView):
 	model = AccessLine
-	template_name = 'phonePlat/access_line/access_line_detail.html'
+	template_name = 'phonePlat/access_line/detail.html'
 
 
 class AccessLineUpdateView(LoginRequiredMixin, UpdateView):
 	model = AccessLine
-	template_name = 'phonePlat/access_line/access_line_update.html'
+	template_name = 'phonePlat/access_line/update.html'
 	form_class = CrispyAccessLineUpdateForm
