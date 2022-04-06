@@ -18,14 +18,45 @@
 		</div>
 		<section class="search">
 			<div class="filter">
-				<i class="fa-solid fa-folder-open icon"></i>
-				<span class="menu">フィルタ：</span>
-			</div>
-			<div class="search__filter open"></div>
+				<span class="open-filter">
+					<i class="fa-solid fa-folder-open icon"></i>
+					フィルタ：
+				</span>
+				<div class="filter__open">
+					<div class="filter__open-menu open">
+						<span class="close-filter">
+							<i class="fa-solid fa-xmark icon"></i>フィルタ：
+						</span>
+					</div>
+					<button type="button" class="reset open">
+						<i class="fa-solid fa-xmark"></i>リセット
+					</button>
+					<div class="mine open">
+						<input type="checkbox" id="mine" class="form-check-input">
+						<label for="mine">自分</label>
+					</div>
+					<div class="system open">
+						<label for="system">システム</label>
+						<input type="text" id="system" class="form-control">
+					</div>
 
+				</div>
+			</div>
 			<div class="result">
-				<i class="fa-solid fa-folder-open icon"></i>
-				<span class="menu">集計：</span>
+				<span class="open-result">
+					<i class="fa-solid fa-folder-open icon"></i>集計：
+				</span>
+				<div class="result__open">
+					<div class="result__open-menu open">
+						<span class="close-result">
+							<i class="fa-solid fa-xmark icon"></i>集計：
+						</span>
+					</div>
+					<div class="result__open-button open">
+						件数
+					</div>
+					<div class="count open">0</div>
+				</div>
 			</div>
 		</section>
 		<section class="row my-3 list">
@@ -88,6 +119,7 @@
 
 {% block javascript %}
 	<script type="text/javascript">
+		new onClickVisible();
         {% for accessline in accessline_list %}
             let get_accessline_table_{{ accessline.pk }} = document.getElementById('accessLineTable{{ accessline.pk }}');
             get_accessline_table_{{ accessline.pk }}.onclick = function() {
