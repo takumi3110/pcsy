@@ -52,35 +52,35 @@ class SystemAdmin(admin.ModelAdmin):
 
 @admin.register(PhoneNumber)
 class PhoneNumberAdmin(admin.ModelAdmin):
-	list_display = ('category', 'number', 'status', 'system', 'service', 'opening_date', 'updated_date', 'updated_user')
-	list_display_links = ('category', 'number', 'status', 'system', 'service', 'opening_date', 'updated_date',
+	list_display = ('category', 'number', 'status', 'system', 'service', 'opening_date', 'updated_at', 'updated_user')
+	list_display_links = ('category', 'number', 'status', 'system', 'service', 'opening_date', 'updated_at',
 	                      'updated_user')
 	list_filter = ('category', 'status', 'system', 'updated_user')
 	search_fields = ('category', 'number', 'system__name', 'service__name')
 	actions_on_bottom = True
-	readonly_fields = ['updated_date']
+	readonly_fields = ['updated_at']
 
 
 @admin.register(SurplusNumber)
 class SurplusNumberAdmin(admin.ModelAdmin):
-	list_display = ('number', 'status', 'system', 'opening_date', 'end_date', 'updated_date', 'updated_user')
-	list_display_links = ('number', 'status', 'system', 'opening_date', 'end_date', 'updated_date', 'updated_user')
+	list_display = ('number', 'status', 'system', 'opening_date', 'end_date', 'updated_at', 'updated_user')
+	list_display_links = ('number', 'status', 'system', 'opening_date', 'end_date', 'updated_at', 'updated_user')
 	list_filter = ('number', 'status', 'system', 'updated_user')
 	search_fields = ('number', 'status', 'system', 'updated_user')
 	actions_on_bottom = True
-	readonly_fields = ['updated_date']
+	readonly_fields = ['updated_at']
 
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
 	list_display = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
-	                'updated_date', 'updated_user')
+	                'updated_at', 'updated_user')
 	list_display_links = ('category', 'number', 'name', 'status', 'team', 'holiday', 'always', 'remind', 'start_date',
-	                      'updated_date', 'updated_user')
+	                      'updated_at', 'updated_user')
 	list_filter = ('category', 'status', 'holiday', 'always', 'remind', 'team', 'updated_user')
 	search_fields = ('number', 'name', 'status', 'team__code', 'updated_user__screenname')
 	actions_on_bottom = True
-	readonly_fields = ['updated_date']
+	readonly_fields = ['updated_at']
 	inlines = [ScenarioInline, IncomingNumberInline]
 	formfield_overrides = {
 		models.TextField: {
@@ -96,14 +96,14 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(AccessLine)
 class AccessLineAdmin(admin.ModelAdmin):
-	list_display = ('parent_number', 'location', 'system', 'status', 'surplus_count', 'allowance_count', 'updated_date',
+	list_display = ('parent_number', 'location', 'system', 'status', 'surplus_count', 'allowance_count', 'updated_at',
 	                'updated_user')
 	list_display_links = ('parent_number', 'location', 'system', 'status', 'surplus_count', 'allowance_count',
-	                      'updated_date', 'updated_user')
+	                      'updated_at', 'updated_user')
 	list_filter = ('location', 'system', 'status', 'parent_number', 'updated_user')
 	search_fields = ('location__name', 'system__name', 'status', 'parent_number__number', 'updated_user__screenname')
 	actions_on_bottom = True
-	readonly_fields = ['updated_date']
+	readonly_fields = ['updated_at']
 	ordering = ['id']
 
 
@@ -118,12 +118,12 @@ class TrankAdmin(admin.ModelAdmin):
 
 @admin.register(Scenario)
 class ScenarioAdmin(admin.ModelAdmin):
-	list_display = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
-	list_display_links = ('number', 'name', 'service', 'team', 'status', 'updated_date', 'updated_user')
+	list_display = ('number', 'name', 'service', 'team', 'status', 'updated_at', 'updated_user')
+	list_display_links = ('number', 'name', 'service', 'team', 'status', 'updated_at', 'updated_user')
 	list_filter = ('status', 'updated_user')
 	search_fields = ('number', 'name', 'service__number', 'team__name')
 	actions_on_bottom = True 
-	readonly_fields = ['updated_date']
+	readonly_fields = ['updated_at']
 	formfield_overrides = {
 		models.TextField: {
 			'widget': Textarea(
@@ -161,7 +161,7 @@ class IncomingNumberAdmin(admin.ModelAdmin):
 	list_filter = ('paying_service', 'status', 'updated_user')
 	search_fields = ('number', 'target_did', 'paying_service__abbreviation', 'status')
 	actions_on_bottom = True
-	readonly_fields = ['updated_date']
+	readonly_fields = ['updated_at']
 
 
 @admin.register(PayingCode)

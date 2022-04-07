@@ -30,7 +30,7 @@ class ScenarioInline(admin.TabularInline):
 	extra = 0
 	ordering = ['number']
 	fields = ('number', 'name', 'status', 'service', 'description', 'updated_date')
-	readonly_fields = ('number', 'name', 'service', 'updated_date')
+	readonly_fields = ('number', 'name', 'service', 'updated_at')
 	formfield_overrides = {
 		models.TextField: {
 			'widget': Textarea(

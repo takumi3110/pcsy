@@ -129,7 +129,7 @@ class Service(models.Model):
 		blank=True
 	)
 
-	updated_date = models.DateTimeField(
+	updated_at = models.DateTimeField(
 		verbose_name='更新日',
 		auto_now=True
 	)
@@ -219,7 +219,7 @@ class Scenario(models.Model):
 		blank=True
 	)
 
-	updated_date = models.DateTimeField(
+	updated_at = models.DateTimeField(
 		verbose_name='更新日',
 		auto_now=True
 	)
@@ -284,7 +284,7 @@ class SurplusNumber(models.Model):
 		blank=True
 	)
 
-	updated_date = models.DateTimeField(
+	updated_at = models.DateTimeField(
 		verbose_name='更新日',
 		auto_now=True
 	)
@@ -365,10 +365,17 @@ class AccessLine(models.Model):
 		verbose_name='しきい値',
 		default=0
 	)
+	
+	created_at = models.DateField(
+		verbose_name='作成日',
+		null=True,
+		blank=True,
+	)
 
-	updated_date = models.DateField(
+	updated_at = models.DateField(
 		verbose_name='更新日',
-		auto_now=True
+		null=True,
+		blank=True
 	)
 
 	updated_user = models.ForeignKey(
@@ -378,6 +385,13 @@ class AccessLine(models.Model):
 		null=True,
 		blank=True
 	)
+	
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.created_at = timezone.now()
+		else:
+			self.updated_at = timezone.now()
+		super(AccessLine, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return f'{self.parent_number.number} {self.location.name} ({self.location.ridge})'
@@ -581,7 +595,7 @@ class PhoneNumber(models.Model):
 		blank=True
 	)
 
-	updated_date = models.DateTimeField(
+	updated_at = models.DateTimeField(
 		verbose_name='更新日',
 		auto_now=True
 	)
@@ -708,7 +722,7 @@ class IncomingNumber(models.Model):
 		blank=True
 	)
 
-	updated_date = models.DateTimeField(
+	updated_at = models.DateTimeField(
 		verbose_name='更新日',
 		auto_now=True
 	)
